@@ -1,54 +1,11 @@
-- name: Lina Tran
-  position: President
-  degree: PhD, Physiology
-  github: linamnt
+- name: James Santangelo
+  degree: PhD, Ecology and Evolutionary Biology
+  github: James-S-Santangelo
   interests:
-    - Python
-    - R
-
-- name: Madeleine Bonsma
-  position: Special Events Coordinator
-  degree: PhD, Physics
-  github: mbonsma
-  interests:
-    - Python
-
-- name: Lindsay Coome
-  position: Marketing and Social Media Coordinator
-  degree: PhD, Psychology
-  github: lcoome
-  interests:
-    - R
 
 - name: Ahmed Hasan
-  position: Course Coordinator
-  degree: PhD, Biology
+  degree: PhD, Cell and Systems Biology
   github: aays
   interests:
     - R
-    - Python
-
-- name: Sara Mahallati
-  position: Admin
-  degree: PhD, Biomedical Engineering
-  github: SaraMati
-  interests:
-    - MATLAB
-    - LaTeX
-    - Python
-
-- name: Elliott Sales de Andrade
-  position: Technical Admin
-  degree: PhD, Physics
-  github: QuLogic
-  interests:
-    - Fortran
-    - Python
-    - Visualization
-
-- name: Nil Sahin
-  position: Treasurer
-  degree: PhD, Molecular Genetics
-  github: nsahin
-  interests:
     - Python
