@@ -8,14 +8,14 @@
     programming language Python with a
     beginner-friendly participatory live-coding.
   # Date of the event in YYYY-MM-DD format
-  date: 2019-01-10
+  date: 2019-02-05
   # Start and end time for event in 24 hour HH:MM format
-  start_time: "18:10"
-  end_time: "19:00"
+  start_time: "13:10"
+  end_time: "14:30"
   # Where the event will take place
-  location: MADLab
+  location: TBA
   # The URL for the location
-  location_url: "https://goo.gl/maps/cfygtx94KL92"
+  # location_url: "https://goo.gl/maps/cfygtx94KL92"
   # Packages to install, a space separating each package
   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
   packages: ""
@@ -35,18 +35,18 @@
   # Explanation of event as a paragraph form
   description: >
     The basics of using R and the Tidyverse for working with data, specifically:
-    - Intro to R/navigating RStudio
+    - Intro to R/navigating RStudio and using Rprojects
     - Intro to Tidyverse - pipe operators
     - Basic data wrangling with dplyr and tidyr packages
   # Date of the event in YYYY-MM-DD format
-  date: 2019-01-17
+  date: 2019-02-19
   # Start and end time for event in 24 hour HH:MM format
-  start_time: "18:10"
-  end_time: "19:00"
+  start_time: "13:10"
+  end_time: "14:30"
   # Where the event will take place
-  location: MADLab
+  location: TBA
   # The URL for the location
-  location_url: "https://goo.gl/maps/cfygtx94KL92"
+  # location_url: "https://goo.gl/maps/cfygtx94KL92"
   # Packages to install, a space separating each package
   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
   packages: "dplyr tidyr"
@@ -73,14 +73,14 @@
     A few intermediate level concept will be introduced, but we will not go
     into scripting in BASH.
   # Date of the event in YYYY-MM-DD format
-  date: 2019-01-24
+  date: 2019-03-05
   # Start and end time for event in 24 hour HH:MM format
-  start_time: "18:10"
-  end_time: "19:00"
+  start_time: "13:10"
+  end_time: "14:30"
   # Where the event will take place
-  location: MADLab
+  location: TBA
   # The URL for the location
-  location_url: "https://goo.gl/maps/cfygtx94KL92"
+  # location_url: "https://goo.gl/maps/cfygtx94KL92"
   # Packages to install, a space separating each package
   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
   packages: ""
@@ -93,31 +93,61 @@
   gh_labels: code-along
 
 
-    # Key is the part of the filename in _posts/
-- key: co-working
+  # Key is the part of the filename in _posts/
+- key: Intro-Git
   # Title of event that will show up as the GH Issue title
-  title: "co-working"
+  title: "Intro to version control with Git"
   # Explanation of event as a paragraph form
-  description: ""
+  description: >
+    This introduction to Git aims to introduce participants to
+    the idea behind version control software. We will work through
+    using command-line git to version control scripts or other
+    documents and briefly introduce the GitHub web-interface.
   # Date of the event in YYYY-MM-DD format
-  date: 2019-04-18
+  date: 2019-03-19
   # Start and end time for event in 24 hour HH:MM format
-  start_time: "18:10"
-  end_time: "19:00"
+  start_time: "13:10"
+  end_time: "14:30"
   # Where the event will take place
-  location: MADLab
+  location: TBA
   # The URL for the location
-  location_url: "https://goo.gl/maps/cfygtx94KL92"
+  # location_url: "https://goo.gl/maps/cfygtx94KL92"
   # Packages to install, a space separating each package
   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
   packages: ""
   # Beginner Intermediate Advanced
-
   youtube_link: ""
-
-  skill_level: Advanced
+  skill_level: Beginner
   # R or Python
-  program_language: Python
+  program_language: Bash
   # Only one label that will be put into the GitHub Issue
   gh_labels: code-along
+
+#     # Key is the part of the filename in _posts/
+# - key: co-working
+#   # Title of event that will show up as the GH Issue title
+#   title: "co-working"
+#   # Explanation of event as a paragraph form
+#   description: ""
+#   # Date of the event in YYYY-MM-DD format
+#   date: 2019-04-18
+#   # Start and end time for event in 24 hour HH:MM format
+#   start_time: "18:10"
+#   end_time: "19:00"
+#   # Where the event will take place
+#   location: MADLab
+#   # The URL for the location
+#   location_url: "https://goo.gl/maps/cfygtx94KL92"
+#   # Packages to install, a space separating each package
+#   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
+#   packages: ""
+#   # Beginner Intermediate Advanced
+
+#   youtube_link: ""
+
+#   skill_level: Advanced
+#   # R or Python
+#   program_language: Python
+#   # Only one label that will be put into the GitHub Issue
+#   gh_labels: code-along
 
