@@ -7,10 +7,10 @@ tags:
   - beginner
 ---
 
- - **Authors**: Charles Zhu, Lina Tran, Madeleine Bonsma
- - **Research field**: Astronomy & astrophysics
+ - **Authors**: Ahmed Hasan, James Santangelo (borrowing from: Charles Zhu, Lina Tran, Madeleine Bonsma)
+ - **Research field**: Biology
  - **Lesson topic**: Introduction to Python syntax and functionality
- - **Lesson content URL**: <https://github.com/UofTCoders/studyGroup/tree/gh-pages/lessons/python/intro>
+ - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/python/intro>
 
 ## Preface: ##
 
@@ -60,4 +60,3 @@ regarding all topics covered in this code-along.  Python is supported
 by a very, very extensive breadth of packages, a list can be found [here](https://pypi.python.org/pypi)
 Like with git, please check out [StackOverflow](https://stackoverflow.com/questions/tagged/python) for
  any question on it.
-
