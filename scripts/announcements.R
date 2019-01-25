@@ -72,7 +72,7 @@ coffee_code_details <-
         ),
         title = "Coffee and Code",
         description = "A casual co-working session - bring your laptop and whatever you're working on!",
-        key = "coffee-and-code")
+        key = "Coffee-and-Code")
 
 # Find any existing posts, take the date, and filter out those sessions from the
 # session_details dataframe.
@@ -104,14 +104,14 @@ post_gh_issue <- function(title, body, labels) {
     if (!devtools:::yesno("Are you sure you want to post this event as an Issue?")) {
         gh::gh(
             "POST /repos/:owner/:repo/issues",
-            owner = "uoftcoders",
+            owner = "utm-coders",
             repo = "Events",
             title = title,
             body = body,
 
             labels = array(c(labels))
         )
-        usethis:::done("Event posted as an Issue to UofTCoders/Events.")
+        usethis:::done("Event posted as an Issue to utm-coders/Events.")
         return(invisible())
     } else {
         message("Event not posted to Issue.")
@@ -137,11 +137,9 @@ gh_issue_info_event <- function(events) {
             - **Instructor**: TBA
             - **Skill level**: {skill_level}
 
-            *Installation instructions*: You will need to install the appropriate programs. See the {program_language} section of the [installation instructions page](https://github.com/UofTCoders/studyGroup/blob/gh-pages/lessons/install-python-r.md). {needs_packages}
+            *Installation instructions*: You will need to install the appropriate programs. See the {program_language} section of the [installation instructions page](https://github.com/utm-coders/studyGroup/blob/gh-pages/lessons/install-git-python-r.md). {needs_packages}
 
-            *Watch*: This event will be [streamed live]({youtube_link}). If you have questions during the live stream (or just want to chat with us), please ask in our [Gitter lobby](https://gitter.im/UofTCoders/Lobby) and we will forward your questions to the instructor! (Although we aim to live stream each event, there are sometimes technical difficulties so it's best to attend in person if you can.)
-
-            **Directions:**  MADLab is located in [Gerstein Science Information Centre](https://goo.gl/maps/2916Y54jQkx), Room B112 at the south end of the first lower level. Once you go through the main entrance of Gerstein, take a right turn down a corridor (across from the admin desk or just past the reading room), then take the stairs down and follow the signs to MADLab, the door should be open 10-15 minutes before the lesson.
+            *Watch*: This event will be [streamed live]({youtube_link}). Although we aim to live stream each event, there are sometimes technical difficulties so it's best to attend in person if you can.
             "
         )
 
@@ -156,7 +154,7 @@ gh_issue_info_coffee_code <- function(events) {
             "
             Our bi-weekly 'Coffee and Code' meet-up:
 
-            Show up anytime between the allotted hours for as long or short as you'd like (see below for details about when and where Coffee and Code will take place). You can even show up earlier or stay later if you're in a coding groove! Look for the UofT Coders posters to find where we're sitting.
+            Show up anytime between the allotted hours for as long or short as you'd like (see below for details about when and where Coffee and Code will take place). You can even show up earlier or stay later if you're in a coding groove!
 
             Bring something to work on whether it be data analysis, a Kaggle competition, making figures, setting up software or anything else you'd like to work on.
 
@@ -197,7 +195,7 @@ create_new_posts_with_content <- function(events) {
 
     # Get the GitHub Issue URL for the event.
     gh_issue_number <- gh::gh("GET /repos/:owner/:repo/issues",
-                              owner = "uoftcoders",
+                              owner = "utm-coders",
                               repo = "Events") %>%
         map_dfr(~ tibble(by_title = .x$title, url = .x$html_url))
 
