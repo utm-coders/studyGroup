@@ -104,7 +104,7 @@ post_gh_issue <- function(title, body, labels) {
     if (!devtools:::yesno("Are you sure you want to post this event as an Issue?")) {
         gh::gh(
             "POST /repos/:owner/:repo/issues",
-            owner = "uoftcoders",
+            owner = "utm-coders",
             repo = "Events",
             title = title,
             body = body,
@@ -195,7 +195,7 @@ create_new_posts_with_content <- function(events) {
 
     # Get the GitHub Issue URL for the event.
     gh_issue_number <- gh::gh("GET /repos/:owner/:repo/issues",
-                              owner = "uoftcoders",
+                              owner = "utm-coders",
                               repo = "Events") %>%
         map_dfr(~ tibble(by_title = .x$title, url = .x$html_url))
 
