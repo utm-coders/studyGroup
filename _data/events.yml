@@ -15,9 +15,9 @@
   # Where the event will take place
   location: Deerfield 3075
   # The URL for the location
-  # location_url: "https://goo.gl/maps/cfygtx94KL92"
+  location_url: ""
   # Packages to install, a space separating each package
-  # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
+#   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
   packages: ""
   youtube_link: ""
   skill_level: Beginner
@@ -46,9 +46,9 @@
   # Where the event will take place
   location: Deerfield 3075
   # The URL for the location
-  # location_url: "https://goo.gl/maps/cfygtx94KL92"
+  location_url: ""
   # Packages to install, a space separating each package
-  # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
+#   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
   packages: "dplyr tidyr"
   # Beginner Intermediate Advanced
   youtube_link: ""
@@ -80,9 +80,9 @@
   # Where the event will take place
   location: Deerfield 3075
   # The URL for the location
-  # location_url: "https://goo.gl/maps/cfygtx94KL92"
+  location_url: ""
   # Packages to install, a space separating each package
-  # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
+#   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
   packages: ""
   # Beginner Intermediate Advanced
   youtube_link: ""
@@ -111,9 +111,9 @@
   # Where the event will take place
   location: Deerfield 3075
   # The URL for the location
-  # location_url: "https://goo.gl/maps/cfygtx94KL92"
+  location_url: ""
   # Packages to install, a space separating each package
-  # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
+#   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
   packages: ""
   # Beginner Intermediate Advanced
   youtube_link: ""
@@ -122,146 +122,6 @@
   program_language: Bash
   # Only one label that will be put into the GitHub Issue
   gh_labels: code-along
-
-  # Key is the part of the filename in _posts/
-- key: Coffee-and-Code
-  # Title of event that will show up as the GH Issue title
-  title: "Coffee and Code"
-  # Explanation of event as a paragraph form
-  description: >
-    Drop by with a coding problem you're working on or
-    just come hang out and write code.
-  # Date of the event in YYYY-MM-DD format
-  date: 2019-02-12
-  # Start and end time for event in 24 hour HH:MM format
-  start_time: "12:00"
-  end_time: "15:00"
-  # Where the event will take place
-  location: Graduate student lounge (Davis 2068B)
-  # The URL for the location
-  # location_url: "https://goo.gl/maps/cfygtx94KL92"
-  # Packages to install, a space separating each package
-  # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
-  packages: ""
-  # Beginner Intermediate Advanced
-  youtube_link: ""
-  skill_level: All
-  # R or Python
-  program_language: Any
-  # Only one label that will be put into the GitHub Issue
-  gh_labels: co-working
-
-    # Key is the part of the filename in _posts/
-- key: Coffee-and-Code
-  # Title of event that will show up as the GH Issue title
-  title: "Coffee and Code"
-  # Explanation of event as a paragraph form
-  description: >
-    Drop by with a coding problem you're working on or
-    just come hang out and write code.
-  # Date of the event in YYYY-MM-DD format
-  date: 2019-02-26
-  # Start and end time for event in 24 hour HH:MM format
-  start_time: "12:00"
-  end_time: "15:00"
-  # Where the event will take place
-  location: Graduate student lounge (Davis 2068B)
-  # The URL for the location
-  # location_url: "https://goo.gl/maps/cfygtx94KL92"
-  # Packages to install, a space separating each package
-  # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
-  packages: ""
-  # Beginner Intermediate Advanced
-  youtube_link: ""
-  skill_level: All
-  # R or Python
-  program_language: Any
-  # Only one label that will be put into the GitHub Issue
-  gh_labels: co-working
-
-    # Key is the part of the filename in _posts/
-- key: Coffee-and-Code
-  # Title of event that will show up as the GH Issue title
-  title: "Coffee and Code"
-  # Explanation of event as a paragraph form
-  description: >
-    Drop by with a coding problem you're working on or
-    just come hang out and write code.
-  # Date of the event in YYYY-MM-DD format
-  date: 2019-03-12
-  # Start and end time for event in 24 hour HH:MM format
-  start_time: "12:00"
-  end_time: "15:00"
-  # Where the event will take place
-  location: Graduate student lounge (Davis 2068B)
-  # The URL for the location
-  # location_url: "https://goo.gl/maps/cfygtx94KL92"
-  # Packages to install, a space separating each package
-  # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
-  packages: ""
-  # Beginner Intermediate Advanced
-  youtube_link: ""
-  skill_level: All
-  # R or Python
-  program_language: Any
-  # Only one label that will be put into the GitHub Issue
-  gh_labels: co-working
-
-    # Key is the part of the filename in _posts/
-- key: Coffee-and-Code
-  # Title of event that will show up as the GH Issue title
-  title: "Coffee and Code"
-  # Explanation of event as a paragraph form
-  description: >
-    Drop by with a coding problem you're working on or
-    just come hang out and write code.
-  # Date of the event in YYYY-MM-DD format
-  date: 2019-03-26
-  # Start and end time for event in 24 hour HH:MM format
-  start_time: "12:00"
-  end_time: "15:00"
-  # Where the event will take place
-  location: Graduate student lounge (Davis 2068B)
-  # The URL for the location
-  # location_url: "https://goo.gl/maps/cfygtx94KL92"
-  # Packages to install, a space separating each package
-  # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
-  packages: ""
-  # Beginner Intermediate Advanced
-  youtube_link: ""
-  skill_level: All
-  # R or Python
-  program_language: Any
-  # Only one label that will be put into the GitHub Issue
-  gh_labels: co-working
-
-    # Key is the part of the filename in _posts/
-- key: Coffee-and-Code
-  # Title of event that will show up as the GH Issue title
-  title: "Coffee and Code"
-  # Explanation of event as a paragraph form
-  description: >
-    Drop by with a coding problem you're working on or
-    just come hang out and write code.
-  # Date of the event in YYYY-MM-DD format
-  date: 2019-04-09
-  # Start and end time for event in 24 hour HH:MM format
-  start_time: "12:00"
-  end_time: "15:00"
-  # Where the event will take place
-  location: Graduate student lounge (Davis 2068B)
-  # The URL for the location
-  # location_url: "https://goo.gl/maps/cfygtx94KL92"
-  # Packages to install, a space separating each package
-  # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
-  packages: ""
-  # Beginner Intermediate Advanced
-  youtube_link: ""
-  skill_level: All
-  # R or Python
-  program_language: Any
-  # Only one label that will be put into the GitHub Issue
-  gh_labels: co-working
 
 #     # Key is the part of the filename in _posts/
 # - key: co-working

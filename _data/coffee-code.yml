@@ -5,9 +5,9 @@
   start_time: "12:00"
   end_time: "15:00"
   # Where the event will take place
-  location: Graduate student lounge (DV2068B)
+  location: Graduate student lounge (Davis 2068B)
   # The URL for the location
-  # location_url: "http://map.utoronto.ca/marker/grad_room_second_cup-313"
+  location_url: ""
   # Only one label that will be put into the GitHub Issue
   gh_labels: "co-working"
 
@@ -18,9 +18,9 @@
   start_time: "12:00"
   end_time: "15:00"
   # Where the event will take place
-  location: Graduate student lounge (DV2068B)
+  location: Graduate student lounge (Davis 2068B)
   # The URL for the location
-  # location_url: "http://map.utoronto.ca/marker/grad_room_second_cup-313"
+  location_url: ""
   # Only one label that will be put into the GitHub Issue
   gh_labels: "co-working"
 
@@ -30,9 +30,9 @@
   start_time: "12:00"
   end_time: "15:00"
   # Where the event will take place
-  location: Graduate student lounge (DV2068B)
+  location: Graduate student lounge (Davis 2068B)
   # The URL for the location
-  # location_url: "http://map.utoronto.ca/marker/grad_room_second_cup-313"
+  location_url: ""
   # Only one label that will be put into the GitHub Issue
   gh_labels: "co-working"
 
@@ -43,13 +43,23 @@
   start_time: "12:00"
   end_time: "15:00"
   # Where the event will take place
-  location: Graduate student lounge (DV2068B)
+  location: Graduate student lounge (Davis 2068B)
   # The URL for the location
-  # location_url: "http://map.utoronto.ca/marker/grad_room_second_cup-313"
+  location_url: ""
   # Only one label that will be put into the GitHub Issue
   gh_labels: "co-working"
 
-
+# Date of the event in YYYY-MM-DD format
+- date: 2019-04-09
+  # Start and end time for event in 24 hour HH:MM format
+  start_time: "12:00"
+  end_time: "15:00"
+  # Where the event will take place
+  location: Graduate student lounge (Davis 2068B)
+  # The URL for the location
+  location_url: ""
+  # Only one label that will be put into the GitHub Issue
+  gh_labels: "co-working"
 
 # Date of the event in YYYY-MM-DD format
 # - date: 2019-03-12
