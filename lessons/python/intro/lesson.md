@@ -18,45 +18,26 @@ This is a very basic introduction to the Python programming language,
 based largely off of the tutorials in the [Beginners' Guide to Python](https://wiki.python.org/moin/BeginnersGuide/Programmers),
 in particular the [Learn Python Tutorials](https://pythonspot.com/).
 
-Only the command line and a basic text editor are required, but quite
-a few integrated development environments exist, however, including [IDLE](https://docs.python.org/3/library/idle.html)
-and [PyCharm](https://www.jetbrains.com/pycharm/).  Madeleine recommends
-[WingIDE101](https://www.wingware.com/downloads/wingide-101/5.1.5-1).
+We will be walking through the lesson content together using a
+Jupyter notebook. We highly recommend installing [Jupyter lab](https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html)
+through [Anaconda](https://www.anaconda.com/distribution/). Detailed 
+download instructions of all required software can be found [HERE](https://github.com/utm-coders/studyGroup/blob/gh-pages/lessons/install-git-python-r.md)
+
 
 ## Lesson Overview: ##
 
-Python implementations generally interpret code (though compilers
-also exist).  The interpreter that comes with python is accessible
-by typing
-
-    python
-
-into the command line (or clicking the executable on your GUI).
-To run scripts and programs, we can instead type
-
-    python practice_code.py
-
-[IPython](https://ipython.org/) is an improved interactive console
-that's both easier to use and supports additional functionality.
-To run IPython, type
-
-    ipython
-
-To run scripts and programs within ipython, type within IPython
-
-    run practice_code.py
-
 The lesson covers:
 
-* Hello World and print statements
-* Number and string manipulation
+* Math, calculations with integers and floats
+* Variables
 * Lists, tuples and dicts
 * Importing libraries
 * Function declaration
-* IPython debugging
+* Conditionals (e.g., if-else) and for loops
+* Brief Numpy, Pandas, and Seaborn
 
 The [official Python documentation site](https://docs.python.org) goes into much more detail
 regarding all topics covered in this code-along.  Python is supported
 by a very, very extensive breadth of packages, a list can be found [here](https://pypi.python.org/pypi)
-Like with git, please check out [StackOverflow](https://stackoverflow.com/questions/tagged/python) for
+Please check out [StackOverflow](https://stackoverflow.com/questions/tagged/python) for
  any question on it.
