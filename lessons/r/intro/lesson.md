@@ -45,13 +45,13 @@ install.packages('tidyverse')
 
 The lesson covers:
 
-* Math, calculations with integers and floats
-* Variables
-* Lists, tuples and dicts
-* Importing libraries
-* Function declaration
-* Conditionals (e.g., if-else) and for loops
-* Brief Numpy, Pandas, and Seaborn
+* The R/RStudio interface and R Notebooks
+* Objects and functions
+* Data frames
+* The `dplyr` package
+* Reading and writing files in R 
+* Introductory plotting with `ggplot2`
+* Knitting Rmd files
 
 [data-carpentry]: https://datacarpentry.org/R-ecology-lesson/
 [rcourse]: https://uoftcoders.github.io/rcourse/
