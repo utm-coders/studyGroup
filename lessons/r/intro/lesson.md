@@ -7,10 +7,10 @@ tags:
   - beginner
 ---
 
- - **Authors**: Ahmed Hasan
+ - **Authors**: Ahmed Hasan and James Santangelo
  - **Research field**: Biology
  - **Lesson topic**: Introduction to R (with a focus on `dplyr` and `ggplot`)
- - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/python/intro>
+ - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/r/intro>
 
 ## Preface: ##
 
