@@ -53,7 +53,7 @@ create some simple data visualizations. This will differ from
 the more 'standard' approach to programming languages, in that
 we'll be jumping relatively quickly into actually working with
 data. However, this is what R itself excels at and is primarily
-used for; thus, my aim here is to provide an overview of how
+used for; thus, our aim here is to provide an overview of how
 you can immediately get to using R in your own research.
 
 ## RStudio, R Scripts, and R Markdown
@@ -65,18 +65,38 @@ in which a user can type in R commands, RStudio provides other 'panes'
 that allow for the writing of entire scripts of code, examining plots,
 and accessing documentation for any of R's many features.
 
-RStudio also supports special file formats for working with R.
+In addition, RStudio features R projects, which combine all of the files
+necessary for the analyses of a particular project in a common directory.
+Importantly, the project's working is automatically changed to the project's
+root, thereby facilitating collaboration by standardising a project's directory
+structure across computers (i.e. it does not depend on the directory structure
+of _your_ computer).  As we'll see in other workshops, R projects also
+facilitate version control using Git and package/dependency management using
+tools like Packrat. 
+
+Finally, RStudio also supports special file formats for working with R.
 One of these, the R Notebook, is what we'll be using today. R Notebooks
 allow us to write regular text and R code in the same document, which
 is very useful for organizing our work and keeping notes to ourselves
 as we go along. An R Notebook can be created via File -> New File ->
 R Notebook.
 
+All text typed into an R Notebook is 'plain text' by default - i.e.  you can
+write whatever you'd like without it being interpreted as code.  To
+specifically insert code, on the other hand, we have to insert a _code chunk_.
+This can be done via either the Insert dropdown above or via the Ctrl/Cmd + Alt
++ I keyboard shortcut. Ctrl/Cmd + Shift + Enter will run the code contained
+within a given code chunk.
+
+To begin with, we will create a new R project called 'intro-r-2019' in a new
+directory using the Projects dropdown in the top right.
+
 # Basic R
 
 ## R as a calculator
 
-In its basest form, R allows us to perform some simple arithmetic:
+In its basest form, R allows us to perform simple arithmetic.
+Let's create a code chunk and do some math:
 
 ```{r}
 2 + 2
@@ -130,6 +150,7 @@ function. Say we wanted to make a vector of size 3:
 ```{r}
 my_vector <- c(2, 5, 9)
 print(my_vector)
+length(my_vector)
 ```
 
 Now, any operations performed on this vector will be vectorized:
@@ -225,6 +246,7 @@ head(airquality) # first 6 rows
 tail(airquality) # last 6 rows
 colnames(airquality) # names of columns
 dim(airquality) # dimensions - rows x columns
+str(airquality) # overall structure of data frame
 ```
 
 Now that we've looked at our dataset a bit, let's explore
@@ -243,7 +265,6 @@ the `library` function:
 library(dplyr)
 airquality <- as_tibble(airquality) # make data frame print nicer
 ```
-
 
 `dplyr` centres around a set of core 'verbs' that we can
 use to perform data frame operations.
@@ -319,7 +340,8 @@ We could try nesting the functions:
 filter(select(airquality, Month, Day), Month > 6)
 ```
 
-But this is unwieldy to both read and write.
+But this is unwieldy to both read and write, especially if additional
+operations are required. 
 
 What about a temporary object?
 
@@ -413,6 +435,18 @@ airquality %>%
 For each value of `Temp` in each row, we've now created a new column called `temp_celsius` that
 stores those values converted to Celsius. Pretty neat, right?
 
+This operation could also be performed by using a custom function:
+
+```{r}
+f_to_c <- function(value) {
+  out <- (value - 32) / 1.8
+  return(out)
+}
+
+airquality %>%
+  mutate(temp_celsius = f_to_c(Temp))
+```
+
 `mutate` can also be used to denote whether certain values meet a condition, in combination
 with a helper function called `ifelse`. Let's say we denote any observation with temp_celsius < 15
 as 'chilly'. We can encode that as a new variable in our data frame:
@@ -462,16 +496,21 @@ library(readr)
 First, let's check our current working directory. This is where R will both look for
 requested files and write new ones.
 
-
 ```{r}
 getwd()
 # setwd() - change dir
 ```
 
+Turns out this is the project directory we originally created! Once again, this
+allows us to keep all our data and code in a single, organized space. We'll
+create a new folder from within RStudio itself called `data` and save our file
+there.  (If you wanted to be code-savvy, you could also use the `dir.create`
+function to do so).
+
 Next, we can write `airquality` to file as follows:
 
 ```{r}
-write_csv(airquality, 'airquality.csv')
+write_csv(airquality, 'data/airquality.csv')
 ```
 
 and read it back in like so:
