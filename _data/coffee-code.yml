@@ -2,8 +2,8 @@
 # Date of the event in YYYY-MM-DD format
 - date: 2019-02-12
   # Start and end time for event in 24 hour HH:MM format
-  start_time: "12:00"
-  end_time: "15:00"
+  start_time: "13:00"
+  end_time: "16:00"
   # Where the event will take place
   location: Graduate student lounge (Davis 2068B)
   # The URL for the location
@@ -15,8 +15,8 @@
 # Date of the event in YYYY-MM-DD format
 - date: 2019-02-26
   # Start and end time for event in 24 hour HH:MM format
-  start_time: "12:00"
-  end_time: "15:00"
+  start_time: "13:00"
+  end_time: "16:00"
   # Where the event will take place
   location: Graduate student lounge (Davis 2068B)
   # The URL for the location
@@ -27,8 +27,8 @@
 # Date of the event in YYYY-MM-DD format
 - date: 2019-03-12
   # Start and end time for event in 24 hour HH:MM format
-  start_time: "12:00"
-  end_time: "15:00"
+  start_time: "13:00"
+  end_time: "16:00"
   # Where the event will take place
   location: Graduate student lounge (Davis 2068B)
   # The URL for the location
@@ -40,8 +40,8 @@
 # Date of the event in YYYY-MM-DD format
 - date: 2019-03-26
   # Start and end time for event in 24 hour HH:MM format
-  start_time: "12:00"
-  end_time: "15:00"
+  start_time: "13:00"
+  end_time: "16:00"
   # Where the event will take place
   location: Graduate student lounge (Davis 2068B)
   # The URL for the location
@@ -52,8 +52,8 @@
 # Date of the event in YYYY-MM-DD format
 - date: 2019-04-09
   # Start and end time for event in 24 hour HH:MM format
-  start_time: "12:00"
-  end_time: "15:00"
+  start_time: "13:00"
+  end_time: "16:00"
   # Where the event will take place
   location: Graduate student lounge (Davis 2068B)
   # The URL for the location
