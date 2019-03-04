@@ -7,7 +7,7 @@ tags:
   - beginner
 ---
 
- - **Authors**: James Santangelo and Ahmed Hasan, based heavily on [material from John Ladan](https://github.com/UofTCoders/studyGroup/blob/gh-pages/lessons/misc/bash-intro/lesson.md) and a third year Bioinformatic bash primer written and delivered by Rob Ness and Ahmed Hasan.
+ - **Authors**: James Santangelo and Ahmed Hasan, based heavily on [material from John Ladan](https://github.com/UofTCoders/studyGroup/blob/gh-pages/lessons/misc/bash-intro/lesson.md) and a fourth year Genomics course bash primer written and delivered by Rob Ness and Ahmed Hasan.
  - **Research field**: Biology
  - **Lesson topic**: Introduction to shells and the command-line with bash.
  - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/misc/bash-intro/>
@@ -35,7 +35,7 @@ In this lesson, we're using bash, but most shells support all of the features co
 
 Let's go ahead and open up our shells. On Macs the program is called `Terminal` and it's installed by default in `/Applications/Utilities/`. You can also use Spotlight and search for `Terminal`. On Windows, search for `git-bash`
 
-With you bash shell open, you can now start issuing commands.
+With your bash shell open, you can now start issuing commands.
 
 # Bash command syntax
 
@@ -59,7 +59,7 @@ We can modify how we want the output of ls to look by adding what's called a *fl
 ls -l
 ```
 
-You can also string multiple flags together. Below, we tell the computer to *list* all (`-h`) with all details (`-l`, e.g. size, date, permissions...), with all sizes in human-readable format (`-h`) and to sort by filesize (`-S`)
+You can also string multiple flags together. Below, we tell the computer to *list* all (`-a`) with all details (`-l`), e.g. size, date, permissions...), with all sizes in human-readable format (`-h`) and to sort by filesize (`-S`)
 
 ```
 ls -alhS
@@ -83,7 +83,7 @@ Back to our folder here. While peeking at the contents of a directory is certain
 
 **Tip:** You can press TAB to atuocomplete directory and filenames. If a file in the working directory matches the start of the file or directory you've started typing, the shell with autocomplete its name.
 
-Once you've navigated to the `intro-bash-demo` folder, *list* the fles in the folder to view its contents.
+Once you've navigated to the `intro-bash-demo` folder, *list* the files in the folder to view its contents.
 
 You notice some text files (e.g. animals.txt) and directories. We'll return to these shortly.
 
@@ -117,13 +117,13 @@ rm -rf folder-to-delete
 
 Beyond navigating directories, bash offers a suite of useful tools to do all sorts of things with files themselves.
 
-Let's examine `hello_world.py` in greater detail. We can do this with `cat`, which simply spits out the contents of a file to the terminal's output.
+Let's examine `hello_world.py` in greater detail. We can do this with `cat`, which simply spits out the contents of a file to the terminal's output. `hello_world.py` is a Python script that we'll run from bash later in the tutorial. At the end of the day, scripts are just plain text files that the computer can execute to perform tasks.
 
 ```
 cat hello_world.py
 ```
 
-When it comes to looking at individual files, however, `cat` is generally not very practical for anything but tiny files like this one. Generally, we would want to use `less`, a program known as a *pager* that is designed to let users scroll through files (no matter how large) by only generating a single 'page worth' at a time.
+When it comes to looking at individual files, however, `cat` is generally not very practical for anything but tiny files like this one. Generally, we would want to use `less`, a program known as a *pager* that is designed to let users scroll through files (no matter how large) by only generating a single 'page worth' at a time. As such, it has very little memory overhead. You can also use your arrow keys to navigate through the pages. Use `q` to quit.
 
 Let's use `less` to view the contents of the larger file, `animals.txt`.
 
@@ -153,7 +153,7 @@ cp animals.txt text-files/animals_copy.txt
 ls text-files # Confirm that file is there
 ```
 
-`mv` (**m**o**v**e) is somewhat similar, but requires you to type out the file you want to move as well as the directory you want to move it to. Let's move our copy of `animals.txt` into `text_files`. Here, we'll also use `mv` to rename `animals_copy.txt` to `animals_copy_2.txt` upon placing it in `text-files`. Otherwise, the version of `animals_copy.txt` already in `text-files` would be overwritten. **Note:** Bash will not warn you before overwritting a file if a file with the same name already exists in the directory.
+`mv` (**m**o**v**e) is somewhat similar, but requires you to type out the file you want to move as well as the directory you want to move it to. Let's move our copy of `animals.txt` into `text_files`.
 
 ```
 mv animals.txt text-files/
@@ -167,6 +167,8 @@ mv animals_copy.txt text-files/animals_copy_2.txt
 ls text-files
 ```
 
+**Note on file naming:** Notice that none of the file or directory names have spaces in them. This is because spaces are used to separate *commands* and *arguments/flags* for command-line programs. In other words, if your directories or files have spaces in their names, they may be interepreted as commands or arguments. It's best to avoid spaces in files and directories.
+
 When working with files you can also use special characters called *wildcards* that represent one or many unspecified characters. The use of *wild cards* to pattern match strings is sometimes referred to as *globbing*. Here are some common patterns for globbing:
 
 - `*` Match any string of arbitrary length
@@ -179,7 +181,7 @@ Let's move all of the Python scripts into the `scripts` folder.
 mv *.py scripts/
 ```
 
-Let's also remove the two copies of `animals.txt` `in text-files`.
+Let's also remove the two copies of `animals.txt` in `text-files`.
 
 ```
 rm text-files/*copy*
@@ -211,7 +213,7 @@ Here is a summary of some of the commands we've used until now.
 
 # Bash pipes and redirects
 
-Let's change into `text-files` and start looking at some more powerful uses of bash.
+Let's **c**hange **d**irectories into `text-files` and start looking at some more powerful uses of bash.
 
 ```
 cd text-files
@@ -243,7 +245,7 @@ grep 'fish' animals.txt > fish.txt
 
 Notice nothing is printed to the shell but a new file with all of the fish has appeared. Cool!
 
-Importantly, using `>` and passing the output to a file that already exists will overwrite that file. It your just want to add to the end of the file, you can *append* using the `>>` operator. Let's append all animals that start with the letter 'E' to `fish.txt` and rename the file to `fish-plus-E.txt`
+Importantly, using `>` and passing the output to a file that already exists will overwrite that file. If you just want to add to the end of the file, you can *append* using the `>>` operator. Let's append all animals that start with the letter 'E' to `fish.txt` and rename the file to `fish-plus-E.txt`
 
 ```
 grep '^E' animals.txt >> fish.txt && mv fish.txt fish-plus-E.txt
@@ -258,9 +260,9 @@ Note the use of `&&`. This allows us to run multiple commands in a single line. 
 
 # Running programs from the command-line
 
-It can be quite useful to write entire scripts and run them in their entirety. This is particularly helpful if running scripts (e.g. in R, Python, etc) on a server or coputer cluster where Graphical User Interfaces (GUI's) are uncommon.
+It can be quite useful to write entire scripts and run them in their entirety. This is particularly helpful if running scripts (e.g. in R, Python, etc) on a server or computer cluster where Graphical User Interfaces (GUI's) are uncommon.
 
-Before starting, let's change into our `scripts` folder. Note, we could run the scripts from aany folder by specifying the full path to the file, but for now we'll change over.
+Before starting, let's change into our `scripts` folder. Note, we could run the scripts from any folder by specifying the full path to the file, but for now we'll change over.
 
 ```
 cd ../scripts
@@ -272,7 +274,7 @@ We'll be executing the python script `hello_world.py`. First, let's make sure th
 which python
 ```
 
-If successful, the shell will print the full path to the executable used in performing the command. Incidentally, these are the files that are executed when your using your computer for everyday use; they're execution is simply hidden because you're often using a GUI.
+If successful, the shell will print the full path to the executable used in performing the command. Incidentally, these are the files that are executed when your using your computer for everyday use; their execution is simply hidden because you're often using a GUI.
 
 Let's go ahead and run our script
 
@@ -280,7 +282,15 @@ Let's go ahead and run our script
 python hello_world.py
 ```
 
-We can similarly execute bash scripts in the same way.
+We can similarly execute bash scripts in the same way. First, let's look at our script.
+
+```
+less print-numbers.sh
+```
+
+See! The script is just a plain text file~
+
+Let's go ahead and execute this script.
 
 ```
 bash print-numbers.sh
@@ -296,13 +306,13 @@ There are special variables called *environment variables* which are used by bas
 echo $PATH
 ```
 
-That's a little tough to read. Let's put the directories in our `$PATH` on separate lines by piping the output of `$PATH` to the **tr**anslate characters command, which allows us to quickly substitude the `:` in `$PATH` with newline (`\n`) characters.
+That's a little tough to read. Let's put the directories in our `$PATH` on separate lines by piping the output of `$PATH` to the **tr**anslate characters command, which allows us to quickly substitute the `:` in `$PATH` with newline (`\n`) characters.
 
 ```
 echo "$PATH" | tr ':' '\n'
 ```
 
-Notice the `$` symbol. This is how variables are accessed in bash. *Environment variables* are always capitalized. The `$PATH` variable sotres the directories you computer searches for programs, commands, and utilitis that have been installed. If you installed something and can't get it to work on the command-line, it's likely because the *executable file* for the program is not in the computers `$PATH`. When we used the `which` command earlier, these are the directories that were searched. If the command in not in `$PATH`, nothing will be printed.
+Notice the `$` symbol. This is how variables are accessed in bash. *Environment variables* are always capitalized. The `$PATH` variable stores the directories you computer searches for programs, commands, and utilities that have been installed. If you installed something and can't get it to work on the command-line, it's likely because the *executable file* for the program is not in the computers `$PATH`. When we used the `which` command earlier, these are the directories that were searched. If the command is not in `$PATH`, nothing will be printed.
 
 ```
 which made-up-command
@@ -316,14 +326,14 @@ echo $PYTHONPATH | tr ':' '\n'
 
 # Bash profile and aliases
 
-It turns out we can more finely tune our shell environment and add shortcuts and customizations to make our lives easier. This is done using `.bash_profile` or `.bashrc` configuration files. You can read about the differences between these [here](https://apple.stackexchange.com/questions/51036/what-is-the-difference-between-bash-profile-and-bashrc). These are shell configuration files that are executed every time you start shell and are executed just prior to the bash prompt appearing in the shell. Let's first see whether you have a configuration file.
+It turns out we can more finely tune our shell environment and add shortcuts and customizations to make our lives easier. This is done using `.bash_profile` or `.bashrc` configuration files. You can read about the differences between these [here](https://apple.stackexchange.com/questions/51036/what-is-the-difference-between-bash-profile-and-bashrc). These are shell configuration files that are executed every time you start shell and are executed just prior to the bash prompt appearing in the shell. Importantly, these files live in your computer's *home directory*; configuration files located anywhere else will not be read by the shell. Let's first see whether you have a configuration file.
 
 ```
 cat ~/.bashrc
 cat ~/.bash_profile
 ```
 
-If the shell told you the files dont exist, you can one (`.bash_profile`) using `vim`, a command-line editor. Run the following command
+If the shell told you the files don't exist, you can make one (`.bash_profile`) using `vim`, a command-line editor. Run the following command
 
 ```
 vi ~/.bash_profile
