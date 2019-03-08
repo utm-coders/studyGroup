@@ -210,11 +210,172 @@ Let's check on all the changes we've made so far!
 git log
 ```
 
-next:
-- add github stuff - ie pushing this repo to github
-- collaboration stuff? ie forking/branching/PRs 
-- add appendix on reverting commits
+# Getting our repo onto GitHub
+
+Next, we'll go into how to add this repo to GitHub. You will need to make a
+free account on GitHub in order to do this.
+
+Once logged in, select the `+` dropdown on the top right of the screen and
+select 'New repository'. Give your repo an informative name -- in this case,
+we'll call it `aboutme` to match our local folder. 
+
+Make sure to _NOT_ check the 'Initialize this repository with a README' box at
+the bottom of the page. This is used when creating an entirely new repo on
+GitHub itself, and not when importing an existing local repo.
+
+Copy the link shown at the top of the page to your clipboard,
+and head back to bash. 
+
+```bash
+pwd # make sure we're in the repo directory
+git remote add origin [link]
+git push -u origin master
+```
+
+Here, `origin` refers to the GitHub version of our repo, while `master` refers
+to the branch currently being worked in. We won't worry too much about branches
+for the purpose of this lesson -- that'll be covered in more depth when we
+discuss collaboration with GitHub. 
+
+Let's now refresh the GitHub page. `bio.txt` now appears on GitHub!  Not only
+that, but the latest commit message is listed just above the file tree.
+
+## Pushing and pulling
+
+Click on `bio.txt` in the file tree to open it on GitHub. On the right hand
+side of the page are a few icons; let's click on the pencil (edit) icon to make
+some new changes. Underneath the existing info about yourself, list your
+favourite colour. Once done, head to the bottom of the page to add a message
+and commit these changes.
+
+Great -- let's now head back to the command line and look at the local copy of `bio.txt`.
+
+```bash
+cat bio.txt
+```
+
+The edit we just made doesn't seem to be there! 
+
+To sync our local repo with the GitHub repo, we have to _pull_
+the changes that are currently on GitHub. 
+
+```bash
+git pull
+```
+
+This will download the changes we made on GitHub earlier.
+
+Conversely, if changes are made locally, we would have to _push_ to GitHub.
+Let's do just that with `bio.txt`. Open the file and add the brand of computer
+you have at the bottom of the file.
+
+Before we can push our changes, we have to go through the motions of committing
+them first:
+
+```bash
+git add bio.txt
+git commit -m 'added laptop brand'
+```
+
+and then we can push our changes. When pushing, remember that we
+have to specify these changes are heading to the GitHub repo (`origin`)
+and that they're going to the master branch for now:
+
+```bash
+git push origin master
+```
+
+And now we're all synced up on GitHub!
+
+# Wrapping up
+
+We've covered some really important fundamentals for working with Git and GitHub today:
+
+- Command line Git and its core commands
+    - `init`
+    - `add`
+    - `commit`
+    - `diff`
+    - `status`
+    - `log`
+- Syncing a repository on GitHub
+    - `remote`
+    - `push`
+    - `pull`
+
+These are sufficient for getting started with Git and maintaining a personal
+codebase in a given repo. Although this is just one relatively simple use case
+for Git and GitHub, it can be incredibly valuable to version control your code
+and make sure all the changes that have been made over time are documented and
+accounted for. It also means that removing/deleting code (accidentally or
+otherwise) isn't a one way street -- at any point in time, earlier versions of
+scripts (or entirely deleted scripts) can be easily accessed and recovered if
+need be. 
+
+However, one of the particular strengths of Git relates specifically to its
+power to facilitate collaboration -- usually on code-based projects, but
+potentially even on manuscripts and material for courses! The same philosophy
+of making sure every change is accounted for is just as useful in that context,
+and GitHub in particular features a whole host of extra features for
+collaborative work.  We'll be covering collaborating with GitHub more in a
+future lesson.
 
 
+## Appendix: reverting commits
+
+(To cover if time allows -- otherwise written up here for reference)
+
+### `git reset`
+
+The current state of a repo is also known as the current HEAD in Git lingo.
+What this means is that if we want to go back one commit, we have to do so
+relative to the current HEAD.
+
+To go back one commit:
+
+```bash
+git reset --hard HEAD~1
+```
+
+`HEAD~1` refers to us moving 'one commit back in time', while the `--hard` flag
+does so _completely_, bringing the repo back to the exact state it was one
+commit ago with no indication that that commit ever happened. Similarly,
+`HEAD~2` will bring us back to two commits ago, and so on. Normally, those
+changes would be irrevocably lost -- however, in our case, we can simply `git
+pull` them back from the GitHub repo.
+
+There are less brute-force ways to move back one or more commits, but we won't
+be covering them in much detail here. A more thorough guide for the various
+flavours of `git reset` (`--soft`, `--mixed`, etc) can be found in the [Git
+documentation][reset-docs].
+
+### Detached `HEAD` state via `git checkout`
+
+Git also allows us to wander through prior states of our repo 'time machine'
+style without altering the repo's current state. To do so, use `git log`
+to see the list of existing commits, and then copy the _commit hash_ for a 
+desired commit to your clipboard. The commit hash is the long string of
+seemingly meaningless letters and numbers listed above each commit.
+Copying the first 6-8 characters should also suffice -- don't worry
+about copying the whole thing.
+
+To go to the state of the repo when this commit was made:
+
+```bash
+git checkout [hash]
+```
+
+`git checkout` is a very powerful command with a variety of uses, many of which
+we will cover when discussing collaboration in Git. Here, we're just using it
+to go back to a given commit. This will put us in 'detached HEAD state'; in other
+words, the current HEAD is unaltered, but we have 'detached' ourselves from it
+and floated over to a past version of this repo. 
+
+To return to the current state of the repo:
+
+```bash
+git checkout master
+```
 
 [bash-intro]: https://github.com/utm-coders/studyGroup/blob/gh-pages/lessons/misc/intro-bash/lesson.md
+[reset-docs]: https://git-scm.com/docs/git-reset
