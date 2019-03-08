@@ -39,6 +39,9 @@ Finally, Linux users can install Git using `apt-get` at the command line:
 sudo apt-get install git
 ```
 
+Finally, you will need to make a free [GitHub][github] account for the latter
+half of this lesson. 
+
 # Why version control?
 
 Version control is a means of tracking changes made to files. These changes are
@@ -56,14 +59,15 @@ Have you ever deleted something and wish you hadn't? Have you ever forgotten
 what you were doing on a project? All these problems are fixed by using version
 control (git)!
 
-Today, we are going to cover a basic Git workflow via the command line.
-We'll be using relatively simple `bash` operations to navigate and
-work with files throughout: if you need a more detailed refresher,
-feel free to refer back to our [Intro Bash][bash-intro] material.
+Today, we are going to cover a basic Git workflow via the command line.  We'll
+be using relatively simple `bash` operations to navigate and work with files
+throughout: if you need a more detailed refresher on these, feel free to refer
+back to our [Intro Bash][bash-intro] material.
 
 Later, as time allows, we'll briefly cover how to bring your Git-controlled
 files to GitHub, a web service that both hosts Git-controlled folders (also
-known as _repositories_) and facilitates collaboration on code-based projects.
+known as _repositories_, or repos for short) and facilitates collaboration on
+code-based projects.
 
 # Configuring Git
 
@@ -83,7 +87,7 @@ Git will use `vim` as its default text editor. If you're more inclined to use
 git config --global core.editor nano
 ```
 
-# Our first repo
+# Getting started with Git
 
 ## Initializing a repo - `git init`
 
@@ -123,8 +127,10 @@ Let's check on the state of our repo.
 git status
 ```
 
-This is an incredibly useful command that returns a host of
-important information about our repo:
+`git status` is an incredibly useful command that returns a host of important
+information about our repo. It's worth running it very liberally whenever one
+is working within a Git repo just to make sure everything looks the way it's
+expected to. 
 
 ```
 $ git status
@@ -143,7 +149,8 @@ nothing added to commit but untracked files present (use "git add" to track)
 Right now, all we have to be concerned about is the 'Untracked files' section.
 Notice that `bio.txt` is listed down there -- it may even be color coded as
 red. This is because Git does not track everything in a folder willy-nilly, and
-will instead wait to be told that `bio.txt` is something we'd like to track.
+will instead wait to be told that `bio.txt` is something the user would like to
+track.
 
 We can tell Git exactly that by using `git add`:
 
@@ -162,7 +169,7 @@ git status
 ```
 
 Here, we use the `-m` flag to denote the message we want to save alongside the
-edits we've made. Git will _insist_ that you add on a message -- commits
+edits we've made. Git will _insist_ that a message is added on -- commits
 without messages are not permitted!  This might seem a bit pushy, but it's
 really Git trying to save you from yourself in making sure each change is
 documented.
@@ -254,7 +261,7 @@ Great -- let's now head back to the command line and look at the local copy of `
 cat bio.txt
 ```
 
-The edit we just made doesn't seem to be there! 
+The edit we just made on GitHub doesn't seem to be there! 
 
 To sync our local repo with the GitHub repo, we have to _pull_
 the changes that are currently on GitHub. 
@@ -305,8 +312,8 @@ We've covered some really important fundamentals for working with Git and GitHub
 
 These are sufficient for getting started with Git and maintaining a personal
 codebase in a given repo. Although this is just one relatively simple use case
-for Git and GitHub, it can be incredibly valuable to version control your code
-and make sure all the changes that have been made over time are documented and
+for Git and GitHub, it is incredibly valuable to version control your code and
+make sure all the changes that have been made over time are documented and
 accounted for. It also means that removing/deleting code (accidentally or
 otherwise) isn't a one way street -- at any point in time, earlier versions of
 scripts (or entirely deleted scripts) can be easily accessed and recovered if
@@ -317,7 +324,7 @@ power to facilitate collaboration -- usually on code-based projects, but
 potentially even on manuscripts and material for courses! The same philosophy
 of making sure every change is accounted for is just as useful in that context,
 and GitHub in particular features a whole host of extra features for
-collaborative work.  We'll be covering collaborating with GitHub more in a
+collaborative work. We'll be covering collaborating with GitHub more in a
 future lesson.
 
 
@@ -341,13 +348,18 @@ git reset --hard HEAD~1
 does so _completely_, bringing the repo back to the exact state it was one
 commit ago with no indication that that commit ever happened. Similarly,
 `HEAD~2` will bring us back to two commits ago, and so on. Normally, those
-changes would be irrevocably lost -- however, in our case, we can simply `git
+changes would be irrevocably* lost -- however, in our case, we can simply `git
 pull` them back from the GitHub repo.
 
 There are less brute-force ways to move back one or more commits, but we won't
 be covering them in much detail here. A more thorough guide for the various
 flavours of `git reset` (`--soft`, `--mixed`, etc) can be found in the [Git
 documentation][reset-docs].
+
+(* There _is_ a way to undo a hard reset via `git reflog`, but only very
+shortly after the reset has happened. Otherwise, Git will quietly clear out
+evidence that that reset ever happened after a few days/weeks.  Best to just
+assume that what's gone is gone and only use `--hard` if absolutely sure)
 
 ### Detached `HEAD` state via `git checkout`
 
@@ -371,11 +383,12 @@ to go back to a given commit. This will put us in 'detached HEAD state'; in othe
 words, the current HEAD is unaltered, but we have 'detached' ourselves from it
 and floated over to a past version of this repo. 
 
-To return to the current state of the repo:
+To return to the current state of the repo (and exit detached HEAD state):
 
 ```bash
 git checkout master
 ```
 
 [bash-intro]: https://github.com/utm-coders/studyGroup/blob/gh-pages/lessons/misc/intro-bash/lesson.md
+[github]: https://github.com
 [reset-docs]: https://git-scm.com/docs/git-reset
