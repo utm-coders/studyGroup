@@ -21,10 +21,14 @@ part of the operating system. In OSX, it can be accessed with `terminal`.
 
 You will also need to have Git installed. For Windows users: We recommend
 downloading `git bash`, which is packaged with [git](https://git-scm.com/) (a
-common version control system).  This contains both Git and a a `bash`
+common version control system).  This contains both Git and a `bash`
 terminal. To install Git on a Mac, you will need to install XCode from the Mac
-App Store. Warning: XCode is a very large download, and one you'll likely want
-to do well before the lesson!  Alternatively, if you have macOS 10.9
+App Store. 
+
+**Warning**: XCode is a _very_ large download, and one you'll likely want
+to do well before the lesson! 
+
+Alternatively, if you have macOS 10.9
 (Mavericks) or higher, simply open a Terminal instance and run
 
 ```
@@ -33,7 +37,7 @@ git --version
 
 to commence the Git installation process. 
 
-Finally, Linux users can install Git using `apt-get` at the command line:
+Linux users can install Git using `apt-get` at the command line:
 
 ```
 sudo apt-get install git
@@ -87,6 +91,10 @@ Git will use `vim` as its default text editor. If you're more inclined to use
 git config --global core.editor nano
 ```
 
+Any text editor can be added in here provided you have the respective command
+line utility. For instance, Sublime Text can be added in using `git config
+--global core.editor subl` provided one has `subl` in the `$PATH`. 
+
 # Getting started with Git
 
 ## Initializing a repo - `git init`
@@ -112,13 +120,17 @@ If done correctly, Git will tell us that our repo has been initialized:
 Initialized empty Git repository in /Users/Ahmed/Desktop/aboutme/.git/
 ```
 
+The `.git` folder can be seen using `ls -a`, which shows all files in the
+current working directory, including hidden ones.
+
 ## Editing and tracking files
 
-Now, let's create a file and get Git to track it:
+Now, let's create some files and get Git to track one:
 
 ```bash
 touch bio.txt # creates empty file called bio.txt
-ls # check to see that file has been made
+touch scratch.txt # creates empty file called scratch.txt
+ls # check to see that file has been created
 ```
 
 Let's check on the state of our repo. 
@@ -142,17 +154,19 @@ Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
         bio.txt
+        scratch.txt
 
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
 Right now, all we have to be concerned about is the 'Untracked files' section.
-Notice that `bio.txt` is listed down there -- it may even be color coded as
-red. This is because Git does not track everything in a folder willy-nilly, and
-will instead wait to be told that `bio.txt` is something the user would like to
-track.
+Notice that both our files are listed down there -- it may even be color coded
+as red. This is because Git does not track everything in a folder willy-nilly,
+and will instead wait to be told that either of these files is something the
+user would like to track.
 
-We can tell Git exactly that by using `git add`:
+We can tell Git exactly that by using `git add`. We'll just be tracking
+`bio.txt` here. 
 
 ```bash
 git add bio.txt
@@ -173,6 +187,11 @@ edits we've made. Git will _insist_ that a message is added on -- commits
 without messages are not permitted!  This might seem a bit pushy, but it's
 really Git trying to save you from yourself in making sure each change is
 documented.
+
+Notice as well that our commit does absolutely nothing to `scratch.txt`. This
+likely does not come as a surprise, but is important to note all the same,
+especially when working with more complex repos where we might not want to
+track all files. (For more on making Git ignore files, see Appendix 2 below) 
 
 Let's now edit `bio.txt` a bit and see how Git responds.  Open `bio.txt` with
 vim in the command line (or whatever your editor of choice may be):
@@ -216,6 +235,17 @@ Let's check on all the changes we've made so far!
 ```bash
 git log
 ```
+
+However, `git log` can get cumbersome as our commit history grows. Here are a
+few flags we can use to 'pretty' it up. Try them out one at a time and see what
+they do! 
+
+```
+git log --oneline --all --decorate --graph
+```
+
+This is an instance where those bash aliases from [our bash
+lesson](https://github.com/utm-coders/Events/issues/17) may come in handy! 
 
 # Getting our repo onto GitHub
 
@@ -312,12 +342,12 @@ We've covered some really important fundamentals for working with Git and GitHub
 
 These are sufficient for getting started with Git and maintaining a personal
 codebase in a given repo. Although this is just one relatively simple use case
-for Git and GitHub, it is incredibly valuable to version control your code and
-make sure all the changes that have been made over time are documented and
-accounted for. It also means that removing/deleting code (accidentally or
-otherwise) isn't a one way street -- at any point in time, earlier versions of
-scripts (or entirely deleted scripts) can be easily accessed and recovered if
-need be. 
+for Git and GitHub, it is incredibly valuable to version control your files
+(whether code, manuscript, and/or data) and make sure all the changes that have
+been made over time are documented and accounted for. It also means that
+removing/deleting code (accidentally or otherwise) isn't a one way street -- at
+any point in time, earlier versions of scripts (or entirely deleted scripts)
+can be easily accessed and recovered if need be. 
 
 However, one of the particular strengths of Git relates specifically to its
 power to facilitate collaboration -- usually on code-based projects, but
@@ -328,7 +358,7 @@ collaborative work. We'll be covering collaborating with GitHub more in a
 future lesson.
 
 
-## Appendix: reverting commits
+## Appendix 1: reverting commits
 
 (To cover if time allows -- otherwise written up here for reference)
 
@@ -348,8 +378,8 @@ git reset --hard HEAD~1
 does so _completely_, bringing the repo back to the exact state it was one
 commit ago with no indication that that commit ever happened. Similarly,
 `HEAD~2` will bring us back to two commits ago, and so on. Normally, those
-changes would be irrevocably* lost -- however, in our case, we can simply `git
-pull` them back from the GitHub repo.
+changes would be irrevocably lost (although see below) -- however, in our case,
+we can simply `git pull` them back from the GitHub repo.
 
 There are less brute-force ways to move back one or more commits, but we won't
 be covering them in much detail here. A more thorough guide for the various
@@ -388,6 +418,39 @@ To return to the current state of the repo (and exit detached HEAD state):
 ```bash
 git checkout master
 ```
+
+## Appendix 2: The `.gitignore` file 
+
+We may occasionally find ourselves with extra files in our repo that we don't
+necessarily want to version control, ever -- not even accidentally. For this
+reason, Git offers a convenient workaround in the form of `.gitignore` files.
+
+A `.gitignore` file is just a text file in your repo called `.gitignore`,
+containing the names of files/directories in the repo that we'd like Git to
+ignore. Each file/directory has to be listed on a new line. 
+
+`.gitignore` files can be made with text editors such as `vim` or `nano`:
+
+```
+vim .gitignore
+```
+
+A standard `.gitignore` may look like this:
+
+```
+*.zip
+.DS_Store
+data/important_file.txt
+```
+
+Note that adding a file that is already being tracked to the `.gitignore` will
+not do anything. To stop tracking a file (but not delete it), use `git rm
+--cached`:
+
+```
+git rm --cached file.txt
+```
+
 
 [bash-intro]: https://github.com/utm-coders/studyGroup/blob/gh-pages/lessons/misc/intro-bash/lesson.md
 [github]: https://github.com
