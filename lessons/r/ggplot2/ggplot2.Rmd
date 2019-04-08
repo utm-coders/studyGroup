@@ -1,0 +1,375 @@
+---
+title: Data visualization in R with ggplot2
+output: pdf_document
+---
+  
+## Lesson preamble
+  
+> ### Learning Objectives
+>
+> - Produce scatter plots, line plots, histograms, bar plots,
+> and boxplots using ggplot.
+> - Plot model fits with `geom_smooth`.
+> - Set universal plot settings.
+> - Understand and apply faceting in ggplot.
+> - Customize plots with `theme`.
+> 
+> ### Setup/Required packages
+>
+> - `install.packages('dplyr')`
+> - `install.packages('ggplot2')`
+> - `install.packages('knitr')`
+>
+
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(eval=FALSE)
+```
+-----
+  
+# Plotting with ggplot2
+
+## Introduction
+
+`ggplot2` is a plotting package that makes it simple to create complex
+plots from data frames. The name `ggplot2` comes from its inspiration, the
+book "A grammar of graphics", and the main goal is to allow coders to express
+their desired outcome on a high level instead of telling the computer every
+detail about what will happen. For example, you would say "color my data by
+species" instead of "go through this data frame and plot any observations of
+species1 in blue, any observations of species2 in red, and so on". Thanks to
+this functional way of interfaces with data, only minimal changes are required
+if the underlying data change or to change the type of plot. This helps in
+thinking about the data and creating publication quality plots with minimal
+amounts of adjustments and tweaking.
+
+`ggplot2` graphics are built step by step by adding new elements, or layers.
+Adding layers in this fashion allows for extensive flexibility and
+customization of plots. 
+
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+
+## The `diamonds` dataset
+
+We will be working with the `diamonds` dataset in this lesson. This is a large (~54,000 x 10)
+dataset containing measurements and prices of various diamonds. If you have an older
+computer and would like to just work with a subset of the data, you can create that
+subsetted data frame as follows:
+  
+```{r}
+d <- head(diamonds, n = 1000)
+```
+
+This will create a new data frame `d` containing just the first 1000 rows
+of the dataset.
+
+## Plotting with `ggplot2` - the geoms
+
+### Making our first scatter plot
+
+To build a ggplot, we need to:
+  
+1. Use the `ggplot()` function and bind the plot to a specific data frame using the
+`data` argument
+
+```{r}
+ggplot(data = diamonds)
+
+```
+
+If the arguments are provided in the right order then the
+names of the arguments can be omitted (as with `dplyr`)
+
+```{r}
+ggplot(diamonds)
+```
+
+2. Define aesthetics (`aes`), by selecting the variables to be plotted and the
+variables to define the presentation such as plotting size, shape color, etc.
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price))
+```
+
+3. Add `geoms` -- geometrical objects as a graphical representation of the data
+in the plot (points, lines, bars). `ggplot2` offers many different geoms; we
+will use a few common ones today, including:
+* `geom_point()` for scatter plots, dot plots, etc.
+* `geom_line()` for trend lines, time-series, etc.
+* `geom_histogram()` for histograms
+
+To add a geom to the plot, use the `+` operator. Because we have two continuous
+variables, let's use `geom_point()` first:
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price)) +
+geom_point()
+```
+
+The `+` in the `ggplot2` package is particularly useful because it allows you
+to modify existing `ggplot` objects. This means you can easily set up plot
+"templates" and conveniently explore different types of plots, so the above
+plot can also be generated with code like this:
+
+```{r, first-ggplot-with-plus}
+# assign plot to a variable
+diamonds_plot <- ggplot(diamonds, aes(x = carat, y = price))
+
+# draw the plot
+diamonds_plot + geom_point()
+```
+
+Notes:
+
+- Anything you put in the `ggplot()` function can be seen by any geom layers
+that you add (i.e., these are universal plot settings). This includes the x and
+y axis you set up in `aes()`.
+- You can also specify aesthetics for a given geom independently of the
+aesthetics defined globally in the `ggplot()` function.
+- The `+` sign used to add layers must be placed at the end of each line containing
+a layer. If, instead, the `+` sign is added in the line before the other layer,
+`ggplot2` will not add the new layer and R will return an error message.
+
+
+### Building plots iteratively + scatter plots
+
+Building plots with `ggplot2` is typically an iterative process. We start by
+defining the dataset we'll use, lay the axes, and choose a geom:
+  
+```{r}
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point()
+```
+
+Then, we start modifying this plot to extract more information from it. For
+instance, we can add transparency (`alpha`) to reduce overplotting:
+  
+  
+```{r}
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.5)
+```
+
+From the eye test, we can see some evidence of clusters in this scatter plots.
+It's possible that one of the categorical variables we have in the data could
+explain this pattern. Coloring the data points according to a categorical
+variable is an easy way to assess if there seems to be correlation. Let's try
+this with `cut`.
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
+  geom_point(alpha = 0.5)
+```
+
+While some clustering is visible here, the pattern is not especially clear.
+Perhaps something else in our dataset might be a better predictor. Let's try
+`clarity` instead:
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price, color = clarity)) +
+geom_point(alpha = 0.5)
+```
+
+Turns out clarity appears to be a strong predictor here after all.  Given that
+IF1 is the best possible clarity measurement, we see that even 1-2 carat IF1
+diamonds fetch equivalent prices to 4-5 carat I1 (lowest clarity) diamonds.
+
+### Combining `dplyr` and `ggplot` - line plots
+
+What if we wanted to see how average carat varies by price?
+We'd first have to calculate what the mean carat value is for each price
+before plotting. Fortunately for us, we can bring back some of those `dplyr`
+skills from our previous lesson to do just that.
+
+```{r}
+diamonds %>% 
+  group_by(price) %>% 
+  summarise(mean_carat = mean(carat))
+```
+
+This transformed dataset can be piped right into a `ggplot` call, with which
+we can proceed to plot:
+
+```{r}
+diamonds %>% 
+  group_by(price) %>% 
+  summarise(mean_carat = mean(carat)) %>% 
+  ggplot(aes(x = price, y = mean_carat)) +
+  geom_line()
+```
+
+There's definitely a lot going on here -- let's just focus on the price range 0 - 5000:
+
+```{r}
+diamonds %>% 
+  group_by(price) %>% 
+  summarise(mean_carat = mean(carat)) %>% 
+  filter(price < 5000) %>% 
+  ggplot(aes(x = price, y = mean_carat)) +
+  geom_line()
+```
+
+
+### Histograms
+
+Similarly to how we've made line plots and scatter plots so far, histograms in `ggplot2`
+can simply be tacked on as another geom. The difference is that histograms do not
+take in a y aesthetic, since that'll be 'count' by definition:
+
+```{r}
+ggplot(diamonds, aes(x = carat)) +
+  geom_histogram()
+```
+
+The binning of a given histogram can be modified by either specifying a binwidth or a fixed number of bins:
+
+```{r}
+ggplot(diamonds, aes(x = carat)) +
+  geom_histogram(binwidth = 0.05)
+```
+
+### Bar plots with `dplyr` and `ggplot` - using grouped `summarise` operations
+
+Earlier, we saw that the `clarity` variable seemed to be associated with the carat of a given diamond.
+Let's investigate this further by calculating the mean carat for each value of `clarity`.
+This can be done using a grouped `summarise` operation via `dplyr`:
+
+```{r}
+diamonds %>% 
+  group_by(clarity) %>% 
+  summarise(mean_carat = mean(carat),
+            sd_carat = sd(carat))
+```
+
+Let's pipe this into a ggplot call with `geom_bar`. We have to be careful to specify `stat = 'identity'` as an
+argument to `geom_bar`. This is because `geom_bar` will otherwise try to apply some sort of transformation instead
+of trying to plot single values, like the ones we have above.
+
+```{r}
+diamonds %>% 
+  group_by(clarity) %>% 
+  summarise(mean_carat = mean(carat),
+            sd_carat = sd(carat)) %>% 
+  ggplot(aes(x = clarity, y = mean_carat)) +
+  geom_bar(stat = 'identity')
+```
+
+We also calculated the standard deviation above using `sd()` within `summarise`. This can
+be used to generate an errorbar with `geom_errorbar()`:
+
+```{r}
+diamonds %>% 
+  group_by(clarity) %>% 
+  summarise(
+    mean_carat = mean(carat),
+    sd_carat = sd(carat)) %>% 
+  ggplot(aes(x = clarity, y = mean_carat)) +
+  geom_bar(stat = 'identity') +
+  geom_errorbar(aes(ymin = mean_carat - sd_carat, 
+                    ymax = mean_carat + sd_carat))
+```
+
+### Boxplots
+
+Although the above plot is in line with the pattern we observed in the scatter plot at the start of the lesson,
+we may want to go a step further and visualize the distribution of `carat` for each value of `clarity` with a boxplot.
+These are rather straightforward to make:
+
+```{r}
+ggplot(diamonds, aes(x = clarity, y = carat)) +
+  geom_boxplot()
+```
+
+
+## Customizing plot appearance
+
+Although our plots have been rendering just fine so far, we may want to go a step further and personalize the plots
+in some way. Fortunately, `ggplot2` features a whole host of customization options, all nestled within a handy function
+called `theme`. Within `theme`, we can specify certain plot elements as named arguments and then use what are called the
+`element` family of functions to style them.
+
+Let's start by regenerating the original scatter plot:
+
+```{r}
+p <- ggplot(diamonds, aes(x = carat, y = price, color = clarity)) +
+  geom_point(alpha = 0.5)
+p
+```
+
+To style text-based elements, such as axis labels as well as axis tick labels, we would use the `element_text` helper function:
+
+```{r}
+p +
+  theme(axis.title = element_text(family = 'Helvetica', size = 14), 
+        axis.text = element_text(family = 'Helvetica', size = 14, color = 'black'))
+```
+
+To style lines, such as axis lines, the `element_line` helper function is the way to go:
+
+```{r}
+p +
+  theme(axis.title = element_text(family = 'Helvetica', size = 14), 
+        axis.text = element_text(family = 'Helvetica', size = 14, color = 'black'),
+        axis.line = element_line(color = 'black', size = 0.75))
+```
+
+But this makes the grey background stick out more. We can get rid of an element altogether by setting it to `element_blank()`.
+
+```{r}
+p +
+  theme(axis.title = element_text(family = 'Helvetica', size = 14), 
+        axis.text = element_text(family = 'Helvetica', size = 14, color = 'black'),
+        axis.line = element_line(color = 'black', size = 0.75),
+        panel.background = element_blank(),
+        legend.key = element_blank())
+```
+
+`ggplot2` also comes preloaded with a host of pre-made themes - try them out:
+
+```{r}
+p + theme_bw()
+p + theme_classic()
+```
+
+
+## Intermediate `ggplot` 
+
+### Faceting
+
+`ggplot` has a special technique called *faceting* that allows the user to split
+one plot into multiple subplots based on a variable included in the dataset. We
+will use `facet_wrap` to make the same scatter plot as above (price by carat) but split it
+by clarity:
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price, color = clarity)) +
+  geom_point(alpha = 0.5) +
+  facet_wrap(~ clarity) +
+  theme_classic()
+```
+
+Alternatively, it may be useful to facet by two categorical variables. This is where `facet_grid` comes in:
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price, color = clarity)) +
+  geom_point(alpha = 0.5) +
+  facet_grid(cut ~ clarity) +
+  theme_classic()
+```
+
+### Possible `coord_cartesian`/`scale_*_continuous` bit?
+
+
+# Conclusion + Links
+
+
+
+
+
+
+
+
