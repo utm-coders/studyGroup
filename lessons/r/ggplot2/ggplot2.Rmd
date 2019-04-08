@@ -284,6 +284,35 @@ ggplot(diamonds, aes(x = clarity, y = carat)) +
   geom_boxplot()
 ```
 
+## Model fits with `geom_smooth`
+
+Fitting models to data is a common means of investigating whether certain relationships are at play in a given dataset.
+`ggplot2` makes visualizing these easy by largely consolidating line-fitting into a single geom - `geom_smooth`.
+
+By default, `geom_smooth` will automatically select what it thinks is the best model for your dataset. However, rarely
+will it select a linear fit. To draw a linear fit, we have to specify it:
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = 'lm')
+```
+
+Adding the color aesthetic we had previously will cause lines to be fit to each individual group:
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price, color = clarity)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = 'lm')
+```
+
+To still fit a line across the entire dataset, specify the color aesthetic _within_ `geom_point`, and not globally.
+
+```{r}
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(aes(color = clarity), alpha = 0.5) +
+  geom_smooth(method = 'lm')
+
 
 ## Customizing plot appearance
 
@@ -361,15 +390,34 @@ ggplot(diamonds, aes(x = carat, y = price, color = clarity)) +
   theme_classic()
 ```
 
-### Possible `coord_cartesian`/`scale_*_continuous` bit?
+# Wrapping up
 
+We've covered many of the core elements of `ggplot2` today:
 
-# Conclusion + Links
+* Basic structure of a ggplot call
+* The `geom` family
+    * `geom_point`
+    * `geom_line`
+    * `geom_histogram`
+    * `geom_bar`
+    * `geom_boxplot`
+* Model fits with `geom_smooth`
+* Customizing plots with `theme`
+    * Using `element` helper functions - `element_text` and `element_line`
+* Faceting with `facet_wrap` and `facet_grid`
 
+## Further resources
 
+* EEB313 - [Introduction to `dplyr` and `ggplot2`][eeb313]
+* Data Carpentry's [Data visualization with `ggplot2`][dc-r]
+* The [data visualization][data-vis] chapter from Hadley Wickham and Garrett Grolemund's _R for Data Science_
+* Hadley Wickham's [_ggplot2_ book][ggplot-book]
+* Winston Chang's [_R Graphics Cookbook_][cookbook]
 
-
-
-
+[cookbook]: https://www.amazon.com/dp/1449316956/ref=cm_sw_su_dp?tag=ggplot2-20
+[data-vis]: https://r4ds.had.co.nz/data-visualisation.html
+[dc-r]: https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html
+[eeb313]: https://uoftcoders.github.io/rcourse/lec04-dplyr.html
+[ggplot-book]: https://www.amazon.com/dp/0387981403/ref=cm_sw_su_dp?tag=ggplot2-20
 
 
