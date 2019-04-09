@@ -315,7 +315,10 @@ ggplot(diamonds, aes(x = carat, y = price)) +
 ```
 
 
-## Customizing plot appearance
+
+## Intermediate `ggplot` 
+
+### Customizing plot appearance
 
 Although our plots have been rendering just fine so far, we may want to go a step further and personalize the plots
 in some way. Fortunately, `ggplot2` features a whole host of customization options, all nestled within a handy function
@@ -364,9 +367,6 @@ p +
 p + theme_bw()
 p + theme_classic()
 ```
-
-
-## Intermediate `ggplot` 
 
 ### Faceting
 
