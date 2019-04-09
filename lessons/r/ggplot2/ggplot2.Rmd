@@ -312,6 +312,7 @@ To still fit a line across the entire dataset, specify the color aesthetic _with
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point(aes(color = clarity), alpha = 0.5) +
   geom_smooth(method = 'lm')
+```
 
 
 ## Customizing plot appearance
