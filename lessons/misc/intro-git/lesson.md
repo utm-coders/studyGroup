@@ -10,7 +10,7 @@ tags:
  - **Authors**: Ahmed Hasan and James Santangelo, based very heavily on [material by Luke Johnston](https://github.com/UofTCoders/studyGroup/blob/gh-pages/lessons/git/intro/lesson.md). 
  - **Research field**: Biology
  - **Lesson topic**: Introduction to Git and GitHub
- - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/misc/git-intro/>
+ - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/misc/intro-git>
 
 In this tutorial, we cover the basics of version control with Git and touch on using GitHub for collaboration.
 

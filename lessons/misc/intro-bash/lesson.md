@@ -10,7 +10,7 @@ tags:
  - **Authors**: James Santangelo and Ahmed Hasan, based heavily on [material from John Ladan](https://github.com/UofTCoders/studyGroup/blob/gh-pages/lessons/misc/bash-intro/lesson.md) and a fourth year Genomics course bash primer written and delivered by Rob Ness and Ahmed Hasan.
  - **Research field**: Biology
  - **Lesson topic**: Introduction to shells and the command-line with bash.
- - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/misc/bash-intro/>
+ - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/misc/intro-bash>
 
 In this tutorial, we cover the basics of interacting with a computer using Bash (the Bourne Again Shell). You may have heard the terms "command line", "terminal", "console", "shell", "interactive prompt", "git-bash", etc. To be imprecise, they all refer to using the keyboard to control your computer by typing commands.
 
