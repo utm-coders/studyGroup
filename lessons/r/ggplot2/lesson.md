@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 'Intro to R'
+title: 'Intro to data visualization with ggplot2'
 visible: true
 tags:
   - r
@@ -10,7 +10,7 @@ tags:
  - **Authors**: Ahmed Hasan and James Santangelo, borrowing heavily from Joel Ostblom
  - **Research field**: Biology
  - **Lesson topic**: Data visualization in R with `ggplot2`
- - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/r/intro>
+ - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/r/ggplot2>
 
 ## Preface: ##
 
