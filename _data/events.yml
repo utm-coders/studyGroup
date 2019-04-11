@@ -123,6 +123,125 @@
   # Only one label that will be put into the GitHub Issue
   gh_labels: code-along
 
+
+  # Key is the part of the filename in _posts/
+- key: intro-ggplot2
+  # Title of event that will show up as the GH Issue title
+  title: "Intro to data visualization with ggplot 2"
+  # Explanation of event as a paragraph form
+  description: >
+    This is an introduction to data visualization in R with the ggplot2 package.
+  # Date of the event in YYYY-MM-DD format
+  date: 2019-04-09
+  # Start and end time for event in 24 hour HH:MM format
+  start_time: "17:10"
+  end_time: "18:30"
+  # Where the event will take place
+  location: Deerfield 3075
+  # The URL for the location
+  location_url: ""
+  # Packages to install, a space separating each package
+#   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
+  packages: "dplyr tidyr"
+  # Beginner Intermediate Advanced
+  youtube_link: ""
+  skill_level: Intermediate
+  # R or Python
+  program_language: R
+  # Only one label that will be put into the GitHub Issue
+  gh_labels: code-along
+
+
+  # Key is the part of the filename in _posts/
+- key: intermediate-python
+  # Title of event that will show up as the GH Issue title
+  title: "Data visualization in Python"
+  # Explanation of event as a paragraph form
+  description: >
+    We will cover data wrangling and visualization in Python using Pandas,
+    Seaborn, and Matplotlib. We will additionally cover some fundamental
+    concepts in Python such as class methods and attributes.
+  # Date of the event in YYYY-MM-DD format
+  date: 2019-04-23
+  # Start and end time for event in 24 hour HH:MM format
+  start_time: "13:10"
+  end_time: "14:30"
+  # Where the event will take place
+  location: North Buidling 3295
+  # The URL for the location
+  location_url: ""
+  # Packages to install, a space separating each package
+#   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
+  packages: "Pandas Seaborn Matplotlib"
+  # Beginner Intermediate Advanced
+  youtube_link: ""
+  skill_level: Intermediate
+  # R or Python
+  program_language: Python
+  # Only one label that will be put into the GitHub Issue
+  gh_labels: code-along
+
+
+  # Key is the part of the filename in _posts/
+- key: project-management
+  # Title of event that will show up as the GH Issue title
+  title: "Project management"
+  # Explanation of event as a paragraph form
+  description: >
+    This lesson will cover project management for reproducible
+    science. Topics will include the directory structure, the use
+    of R projects, virtual/conda environments for Python,
+    git, and dependency (i.e. package/module) management.
+  # Date of the event in YYYY-MM-DD format
+  date: 2019-05-07
+  # Start and end time for event in 24 hour HH:MM format
+  start_time: "13:10"
+  end_time: "14:30"
+  # Where the event will take place
+  location: North Buidling 3295
+  # The URL for the location
+  location_url: ""
+  # Packages to install, a space separating each package
+#   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
+  packages: ""
+  # Beginner Intermediate Advanced
+  youtube_link: ""
+  skill_level: Beginner
+  # R or Python
+  program_language: R/Git/Python
+  # Only one label that will be put into the GitHub Issue
+  gh_labels: code-along
+
+
+    # Key is the part of the filename in _posts/
+- key: git-collaboration
+  # Title of event that will show up as the GH Issue title
+  title: "Collaborating with Git/GitHub"
+  # Explanation of event as a paragraph form
+  description: >
+    This lesson will cover the fundamentals of collaborating
+    using Git/GitHub.
+  # Date of the event in YYYY-MM-DD format
+  date: 2019-05-21
+  # Start and end time for event in 24 hour HH:MM format
+  start_time: "13:10"
+  end_time: "14:30"
+  # Where the event will take place
+  location: North Buidling 3295
+  # The URL for the location
+  location_url: ""
+  # Packages to install, a space separating each package
+#   # (e.g. "dplyr tidyr" or "Pandas>=0.21 Seaborn")
+  packages: ""
+  # Beginner Intermediate Advanced
+  youtube_link: ""
+  skill_level: Intermediate
+  # R or Python
+  program_language: Bash
+  # Only one label that will be put into the GitHub Issue
+  gh_labels: code-along
+
+
 #     # Key is the part of the filename in _posts/
 # - key: co-working
 #   # Title of event that will show up as the GH Issue title

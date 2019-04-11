@@ -111,7 +111,7 @@ post_gh_issue <- function(title, body, labels) {
 
             labels = array(c(labels))
         )
-        usethis:::done("Event posted as an Issue to utm-coders/Events.")
+        # usethis:::done("Event posted as an Issue to utm-coders/Events.")
         return(invisible())
     } else {
         message("Event not posted to Issue.")
@@ -219,7 +219,7 @@ create_new_posts_with_content <- function(events) {
     # Save post content to file
     fs::dir_create(here::here("_posts"))
     map2(new_post_content, new_post_filenames, ~ readr::write_lines(x = .x, path = .y))
-    usethis:::done("Markdown posts created in _posts/ folder.")
+    # usethis:::done("Markdown posts created in _posts/ folder.")
     return(invisible())
 }
 
