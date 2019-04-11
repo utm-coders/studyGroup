@@ -3,7 +3,7 @@ layout: page
 title: Introduction to Git
 visible: true
 tags:
-  - misc
+  - git
   - beginner
 ---
 
