@@ -3,14 +3,14 @@ layout: page
 title: Introduction to Git
 visible: true
 tags:
-  - misc
+  - git
   - beginner
 ---
 
- - **Authors**: Ahmed Hasan and James Santangelo, based very heavily on [material by Luke Johnston](https://github.com/UofTCoders/studyGroup/blob/gh-pages/lessons/git/intro/lesson.md). 
+ - **Authors**: Ahmed Hasan and James Santangelo, based very heavily on [material by Luke Johnston](https://github.com/UofTCoders/studyGroup/blob/gh-pages/lessons/git/intro/lesson.md).
  - **Research field**: Biology
  - **Lesson topic**: Introduction to Git and GitHub
- - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/misc/intro-git>
+ - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/git/intro-git>
 
 In this tutorial, we cover the basics of version control with Git and touch on using GitHub for collaboration.
 
@@ -23,10 +23,10 @@ You will also need to have Git installed. For Windows users: We recommend
 downloading `git bash`, which is packaged with [git](https://git-scm.com/) (a
 common version control system).  This contains both Git and a `bash`
 terminal. To install Git on a Mac, you will need to install XCode from the Mac
-App Store. 
+App Store.
 
 **Warning**: XCode is a _very_ large download, and one you'll likely want
-to do well before the lesson! 
+to do well before the lesson!
 
 Alternatively, if you have macOS 10.9
 (Mavericks) or higher, simply open a Terminal instance and run
@@ -35,7 +35,7 @@ Alternatively, if you have macOS 10.9
 git --version
 ```
 
-to commence the Git installation process. 
+to commence the Git installation process.
 
 Linux users can install Git using `apt-get` at the command line:
 
@@ -44,7 +44,7 @@ sudo apt-get install git
 ```
 
 Finally, you will need to make a free [GitHub][github] account for the latter
-half of this lesson. 
+half of this lesson.
 
 # Why version control?
 
@@ -93,7 +93,7 @@ git config --global core.editor nano
 
 Any text editor can be added in here provided you have the respective command
 line utility. For instance, Sublime Text can be added in using `git config
---global core.editor subl` provided one has `subl` in the `$PATH`. 
+--global core.editor subl` provided one has `subl` in the `$PATH`.
 
 # Getting started with Git
 
@@ -133,7 +133,7 @@ touch scratch.txt # creates empty file called scratch.txt
 ls # check to see that file has been created
 ```
 
-Let's check on the state of our repo. 
+Let's check on the state of our repo.
 
 ```bash
 git status
@@ -142,7 +142,7 @@ git status
 `git status` is an incredibly useful command that returns a host of important
 information about our repo. It's worth running it very liberally whenever one
 is working within a Git repo just to make sure everything looks the way it's
-expected to. 
+expected to.
 
 ```
 $ git status
@@ -166,14 +166,14 @@ and will instead wait to be told that either of these files is something the
 user would like to track.
 
 We can tell Git exactly that by using `git add`. We'll just be tracking
-`bio.txt` here. 
+`bio.txt` here.
 
 ```bash
 git add bio.txt
 git status
 ```
 
-`git status` now lists `bio.txt` under 'Changes to be committed'. 
+`git status` now lists `bio.txt` under 'Changes to be committed'.
 A _commit_ is the Git term for a save point. Let's do just that
 using the `git commit` command:
 
@@ -191,7 +191,7 @@ documented.
 Notice as well that our commit does absolutely nothing to `scratch.txt`. This
 likely does not come as a surprise, but is important to note all the same,
 especially when working with more complex repos where we might not want to
-track all files. (For more on making Git ignore files, see Appendix 2 below) 
+track all files. (For more on making Git ignore files, see Appendix 2 below)
 
 Let's now edit `bio.txt` a bit and see how Git responds.  Open `bio.txt` with
 vim in the command line (or whatever your editor of choice may be):
@@ -207,7 +207,7 @@ Press 'i' to enter insert mode in vim, and then add:
 - Your favourite programming language
 - One programming language you'd like to learn one day
 
-Remember to then hit ESC and type ':wq' to exit vim. 
+Remember to then hit ESC and type ':wq' to exit vim.
 
 Let's check the status of our repo:
 
@@ -238,14 +238,14 @@ git log
 
 However, `git log` can get cumbersome as our commit history grows. Here are a
 few flags we can use to 'pretty' it up. Try them out one at a time and see what
-they do! 
+they do!
 
 ```
 git log --oneline --all --decorate --graph
 ```
 
 This is an instance where those bash aliases from [our bash
-lesson](https://github.com/utm-coders/Events/issues/17) may come in handy! 
+lesson](https://github.com/utm-coders/Events/issues/17) may come in handy!
 
 # Getting our repo onto GitHub
 
@@ -254,14 +254,14 @@ free account on GitHub in order to do this.
 
 Once logged in, select the `+` dropdown on the top right of the screen and
 select 'New repository'. Give your repo an informative name -- in this case,
-we'll call it `aboutme` to match our local folder. 
+we'll call it `aboutme` to match our local folder.
 
 Make sure to _NOT_ check the 'Initialize this repository with a README' box at
 the bottom of the page. This is used when creating an entirely new repo on
 GitHub itself, and not when importing an existing local repo.
 
 Copy the link shown at the top of the page to your clipboard,
-and head back to bash. 
+and head back to bash.
 
 ```bash
 pwd # make sure we're in the repo directory
@@ -272,7 +272,7 @@ git push -u origin master
 Here, `origin` refers to the GitHub version of our repo, while `master` refers
 to the branch currently being worked in. We won't worry too much about branches
 for the purpose of this lesson -- that'll be covered in more depth when we
-discuss collaboration with GitHub. 
+discuss collaboration with GitHub.
 
 Let's now refresh the GitHub page. `bio.txt` now appears on GitHub!  Not only
 that, but the latest commit message is listed just above the file tree.
@@ -291,10 +291,10 @@ Great -- let's now head back to the command line and look at the local copy of `
 cat bio.txt
 ```
 
-The edit we just made on GitHub doesn't seem to be there! 
+The edit we just made on GitHub doesn't seem to be there!
 
 To sync our local repo with the GitHub repo, we have to _pull_
-the changes that are currently on GitHub. 
+the changes that are currently on GitHub.
 
 ```bash
 git pull
@@ -347,7 +347,7 @@ for Git and GitHub, it is incredibly valuable to version control your files
 been made over time are documented and accounted for. It also means that
 removing/deleting code (accidentally or otherwise) isn't a one way street -- at
 any point in time, earlier versions of scripts (or entirely deleted scripts)
-can be easily accessed and recovered if need be. 
+can be easily accessed and recovered if need be.
 
 However, one of the particular strengths of Git relates specifically to its
 power to facilitate collaboration -- usually on code-based projects, but
@@ -395,7 +395,7 @@ assume that what's gone is gone and only use `--hard` if absolutely sure)
 
 Git also allows us to wander through prior states of our repo 'time machine'
 style without altering the repo's current state. To do so, use `git log`
-to see the list of existing commits, and then copy the _commit hash_ for a 
+to see the list of existing commits, and then copy the _commit hash_ for a
 desired commit to your clipboard. The commit hash is the long string of
 seemingly meaningless letters and numbers listed above each commit.
 Copying the first 6-8 characters should also suffice -- don't worry
@@ -411,7 +411,7 @@ git checkout [hash]
 we will cover when discussing collaboration in Git. Here, we're just using it
 to go back to a given commit. This will put us in 'detached HEAD state'; in other
 words, the current HEAD is unaltered, but we have 'detached' ourselves from it
-and floated over to a past version of this repo. 
+and floated over to a past version of this repo.
 
 To return to the current state of the repo (and exit detached HEAD state):
 
@@ -419,7 +419,7 @@ To return to the current state of the repo (and exit detached HEAD state):
 git checkout master
 ```
 
-## Appendix 2: The `.gitignore` file 
+## Appendix 2: The `.gitignore` file
 
 We may occasionally find ourselves with extra files in our repo that we don't
 necessarily want to version control, ever -- not even accidentally. For this
@@ -427,7 +427,7 @@ reason, Git offers a convenient workaround in the form of `.gitignore` files.
 
 A `.gitignore` file is just a text file in your repo called `.gitignore`,
 containing the names of files/directories in the repo that we'd like Git to
-ignore. Each file/directory has to be listed on a new line. 
+ignore. Each file/directory has to be listed on a new line.
 
 `.gitignore` files can be made with text editors such as `vim` or `nano`:
 

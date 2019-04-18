@@ -49,8 +49,9 @@
   # Only one label that will be put into the GitHub Issue
   gh_labels: "co-working"
 
+
 # Date of the event in YYYY-MM-DD format
-- date: 2019-04-09
+- date: 2019-04-16
   # Start and end time for event in 24 hour HH:MM format
   start_time: "13:00"
   end_time: "16:00"
@@ -61,42 +62,39 @@
   # Only one label that will be put into the GitHub Issue
   gh_labels: "co-working"
 
-# Date of the event in YYYY-MM-DD format
-# - date: 2019-03-12
-#   # Start and end time for event in 24 hour HH:MM format
-#   start_time: "9:00"
-#   end_time: "11:00"
-#   # Where the event will take place
-#   location: Second Cup at Grad Room
-#   # The URL for the location
-#   location_url: "http://map.utoronto.ca/marker/grad_room_second_cup-313"
-#   # Only one label that will be put into the GitHub Issue
-#   gh_labels: "co-working"
+  # Date of the event in YYYY-MM-DD format
+- date: 2019-04-30
+  # Start and end time for event in 24 hour HH:MM format
+  start_time: "13:00"
+  end_time: "16:00"
+  # Where the event will take place
+  location: Graduate student lounge (Davis 2068B)
+  # The URL for the location
+  location_url: ""
+  # Only one label that will be put into the GitHub Issue
+  gh_labels: "co-working"
 
+  # Date of the event in YYYY-MM-DD format
+- date: 2019-05-14
+  # Start and end time for event in 24 hour HH:MM format
+  start_time: "13:00"
+  end_time: "16:00"
+  # Where the event will take place
+  location: Graduate student lounge (Davis 2068B)
+  # The URL for the location
+  location_url: ""
+  # Only one label that will be put into the GitHub Issue
+  gh_labels: "co-working"
 
+  # Date of the event in YYYY-MM-DD format
+- date: 2019-05-28
+  # Start and end time for event in 24 hour HH:MM format
+  start_time: "13:00"
+  end_time: "16:00"
+  # Where the event will take place
+  location: Graduate student lounge (Davis 2068B)
+  # The URL for the location
+  location_url: ""
+  # Only one label that will be put into the GitHub Issue
+  gh_labels: "co-working"
 
-# Date of the event in YYYY-MM-DD format
-# - date: 2019-03-26
-#   # Start and end time for event in 24 hour HH:MM format
-#   start_time: "9:00"
-#   end_time: "11:00"
-#   # Where the event will take place
-#   location: Second Cup at Grad Room
-#   # The URL for the location
-#   location_url: "http://map.utoronto.ca/marker/grad_room_second_cup-313"
-#   # Only one label that will be put into the GitHub Issue
-#   gh_labels: "co-working"
-
-
-
-# Date of the event in YYYY-MM-DD format
-# - date: 2019-04-09
-#   # Start and end time for event in 24 hour HH:MM format
-#   start_time: "9:00"
-#   end_time: "11:00"
-#   # Where the event will take place
-#   location: Second Cup at Grad Room
-#   # The URL for the location
-#   location_url: "http://map.utoronto.ca/marker/grad_room_second_cup-313"
-#   # Only one label that will be put into the GitHub Issue
-#   gh_labels: "co-working"
