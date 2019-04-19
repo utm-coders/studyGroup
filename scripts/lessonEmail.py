@@ -38,7 +38,7 @@ def create_message(sender, receivers, event):
     """Parses today's event dictionary and composes HTML message with details
 
     Args:
-        sender ('str'): Sender Email. Provided ast command-line. Must be UToronto Email
+        sender ('str'): Sender Email. Provided as command-line. Must be UToronto Email
         receivers (:obj:'list' of :obj:'str'): List with receiving Emails as string elements. Email sent to all Emails in list.
         event (:obj:'dict'): Dictionary storing information on current day's event
 
@@ -112,7 +112,7 @@ def send_email(user, password, msg):
         msg (:obj:'MIMEMultipart'): Email in HTML format. See email.mime.multipart.MIMEMultipart().
 
     Returns:
-        None: Sends ecrypted (TLS) Email over SMTP server.
+        None: Sends encrypted (TLS) Email over SMTP server.
     """
 
     try:
@@ -125,7 +125,7 @@ def send_email(user, password, msg):
         smtp.ehlo()
         smtp.login(user=user, password=password)
 
-        # Conver message text to string and send
+        # Convert message text to string and send
         text = msg.as_string()
         # print(text)
         smtp.sendmail(sender, receivers, text)
