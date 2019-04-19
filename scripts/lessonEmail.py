@@ -150,7 +150,7 @@ if __name__ == '__main__':
     sender = args['sender']  # Get sender from command-line
 
     # Email sent to all addresses in list
-    receivers = ['james.santangelo37@gmail.com']
+    receivers = ['james.santangelo37@gmail.com', 'ahmed.hasan@mail.utoronto.ca']
     msg = create_message(sender, receivers, event)  # Create Email message
 
     # Get user-provided UTORID and password.
