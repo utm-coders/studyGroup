@@ -30,7 +30,7 @@ def get_event():
         for event in all_events:
 
             # Get only event matching current date
-            if event['key'] == 'project-management':
+            if event['date'] == current_date:
                 return event
 
 
