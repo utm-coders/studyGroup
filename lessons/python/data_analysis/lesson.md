@@ -1,13 +1,13 @@
 ---
 layout: page
-title: 'Data anlysis in Python'
+title: 'Data analysis in Python'
 visible: true
 tags:
   - python
   - intermediate
 ---
 
- - **Authors**: Ahmed Hasan, James Santangelo, borrowing from [UofT Coders lesson by Luke Johnston](https://github.com/UofTCoders/studyGroup/blob/gh-pages/lessons/python/pandas2/UofT-pandas.ipynb)
+ - **Authors**: Ahmed Hasan, James Santangelo, borrowing from [UofT Coders lesson by Derek Howard](https://github.com/UofTCoders/studyGroup/blob/gh-pages/lessons/python/pandas2/UofT-pandas.ipynb)
  - **Research field**: Biology
  - **Lesson topic**: Introduction to Data analysis in Python
  - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/python/data_analysis>
@@ -15,7 +15,7 @@ tags:
 ## Preface: ##
 
 This is an introduction to data analysis in Python, including data manipulation and
-visualisation, and an introduction to common Python module in scientific computation.
+visualisation, and an introduction to common Python modules in scientific computation.
 
 We will be walking through the lesson content together using a
 Jupyter notebook. We highly recommend installing [Jupyter lab](https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html)
@@ -28,9 +28,9 @@ download instructions of all required software can be found [HERE](https://githu
 The lesson covers:
 
 * Python class methods and attributes
-* The Numpy module for scientific computation
-* The Pandas module for dataframes
-* The Matplotlib/Seaborn packages for visualisation
+* The `numpy` module for scientific computation
+* The `pandas` module for dataframes
+* The `matplotlib`/`seaborn` packages for visualisation
 
 The [official Python documentation site](https://docs.python.org) goes into much more detail
 regarding all topics covered in this code-along.  Python is supported
