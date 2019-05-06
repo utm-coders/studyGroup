@@ -1,0 +1,1 @@
+This directory contains files associated with a tutorial on project management given by UTM coders on May 7, 2019, at the University of Toronto Mississauga. The tutorial was instructed by James S. Santangelo.
