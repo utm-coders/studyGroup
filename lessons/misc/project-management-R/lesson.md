@@ -12,7 +12,7 @@ tags:
  - **Lesson topic**: Introduction to project management for reproducible science in R
  - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/bash/project-management>
 
-Do you struggle with figuring out the ideal directory structure for projects you're working on? Are you tired of having dozens of manuscript or script files clutering up the directories on your computer? Have you ever overwritten some code that you later realized you still needed? Have you ever come back to a project after some time and forgotten where you were or how some of the files were generated? All of these problems (and more!) can be solved through effective project management.
+Do you struggle with figuring out the ideal directory structure for projects you're working on? Are you tired of having dozens of manuscript or script files cluttering up the directories on your computer? Have you ever overwritten some code that you later realized you still needed? Have you ever come back to a project after some time and forgotten where you were or how some of the files were generated? All of these problems (and more!) can be solved through effective project management.
 
 In this tutorial, we will cover the basics of project management for reproducible science in R. Topics will include:
 1. Directory structure
@@ -28,7 +28,7 @@ You will also need `R` installed. Detailed download instructions of all required
 
 # Why think about project management?
 
-Effective project management is essential for a few reasons. First, and perhaps most importantly, is that it does your future self a huge favour by ensuring you could always come back to a project at a later time and pick up where you left off without much hassle. Second, it ensures your projects (e.g., data anlyses) will be reproducible by yourself and by others in the future, even if programs or packages are updated. Third, good project management facilitates collaboration by ensuring a consistent and well-documented workflow for all collaborators (in fact, this is what makes developing these workshops so seamless!). Finally, having well-organized projects just feels good and makes working on projects a breeze rather than a headache.
+Effective project management is essential for a few reasons. First, and perhaps most importantly, is that it does your future self a huge favour by ensuring you could always come back to a project at a later time and pick up where you left off without much hassle. Second, it ensures your projects (e.g., data analyses) will be reproducible by yourself and by others in the future, even if programs or packages are updated. Third, good project management facilitates collaboration by ensuring a consistent and well-documented workflow for all collaborators (in fact, this is what makes developing these workshops so seamless!). Finally, having well-organized projects just feels good and makes working on projects a breeze rather than a headache.
 
 To put this in perspective, below is an example of a previous project of mine that I consider to be **bad** project management. There is no consistency in the naming of directories (some use spaces while others use forward slashes), there are many random files clutering up the project's root directory, and the manuscript submission folder is **filled** with different files, many of which I naively thought were the 'FINAL' versions.
 
@@ -86,7 +86,7 @@ Lets now work with some of the files in this directory to get a sense of the wor
 
 First, open `Rstudio`.
 
-We will now create an `Rproject`, which is a way of reproducibly working with data in R. `Rprojects` eliminate a lot of the headache of having to keep track of working directories and additionally integrate version control (using `git`) and dependency management (using `packrat`). This greatly facillitates reproducibility and collaboration, since the project's dependencies and directories will now be consistent across machines.
+We will now create an `Rproject`, which is a way of reproducibly working with data in R. `Rprojects` eliminate a lot of the headache of having to keep track of working directories and additionally integrate version control (using `git`) and dependency management (using `packrat`). This greatly facilitates reproducibility and collaboration, since the project's dependencies and directories will now be consistent across machines.
 
 To start a new `Rproject`, navigate to `file > new project` and choose `existing directory`. Choose the `project-management-demo` directory that is part of this tutorial. Create the `Rproject`.
 
@@ -120,7 +120,7 @@ Git is telling us that it isn't tracking anything (as expected). In fact, there 
 vi .gitignore
 ```
 
-Add `.Rhistory` and `.Rproj.user/` on separate lines in the file (Make sure you're in insert more by first typin `i`). Then, quit using `:wq`. Note you can add any other directories or files you don't want git to track directly to this file.
+Add `.Rhistory` and `.Rproj.user/` on separate lines in the file (Make sure you're in insert more by first typing `i`). Then, quit by typing `:wq`. Note you can add any other directories or files you don't want git to track directly to this file.
 
 Check the status again by typing `git status`. You should no longer see the `.Rhistory` and `.Rproj.user/` file, but instead see the `.gitignore` file. Lets commit these changes.
 
@@ -135,16 +135,36 @@ Another `git status` confirms that the repo is up to date and git hasn't recogni
 
 Now that `git` is initialized and tracking the files in this directory, we can initialize `packrat`, which will keep track of installed packages and their versions. This ensures that if you come back to the project in two years, after having updated many packages, your analyses will still be based on the versions you were initially using.
 
-Lets click on the `.Rproj` file to open the `Rproject` options. In the left sidebar, click on `Packrat` and then on `use packrat with this project`. We'll want to check both `git ignore packrat library` and `git ignore package sources`.
+While we can initialize `packrat` directly from the `Rproject` options, we're going to do it manually to give us more control over package installations. Lets install `packrat` by typing the following into your **RStudio console**
 
-Lets run a `git status` to see what has changed. Git has noticed changes to a few files. Lets commit all of these changes.
+```
+install.packages("packrat")
+```
+
+We now need to initialize the current project as a packrat project. We can do this by typing:
+
+```
+packrat::init(infer.dependencies = FALSE)
+```
+
+The `infer.dependencies = FALSE` argument tells packrat not to scan our code for calls to the `library()` function. In other words, we're starting a *bare* `packrat` project and will install all required packages ourselves. Go ahead and initialize the project.
+
+Lets run a `git status` to see what has changed. Git has noticed changes to a few files.
+
+You'll notice a new directory has been created entitled `packrat`. This is where all of the packages for this project will be installed along with packrat-specific settings and options.
+
+Before moving on, lets add `packrat/src/` to our `.gitignore` to avoid commiting all the source code tarballs to our `git` repo. You can open you .gitignore file in `RStudio` and add `packrat/src/` onto a new line, or type the following into your terminal.
+
+```
+echo packrat/src/ >> .gitignore
+```
+
+Lets now commit all of these changes.
 
 ```
 git add .
 git commit -m "Adding packrat to project"
 ```
-
-You'll notice a new directory has been created entitled `packrat`. This is where all of the packages for this project will be installed along with packrat-specific settings and options.
 
 Similar to `git`, packrat allows you to check the status the projects dependencies. Lets got ahead a do that by typing the following in the **R console**.
 
