@@ -245,7 +245,7 @@ git log --oneline --all --decorate --graph
 ```
 
 This is an instance where those bash aliases from [our bash
-lesson](https://github.com/utm-coders/Events/issues/17) may come in handy!
+lesson][bash-intro] may come in handy!
 
 # Getting our repo onto GitHub
 
