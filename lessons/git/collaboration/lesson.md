@@ -15,8 +15,8 @@ tags:
 In this tutorial, we will cover using Git and GitHub for collaboration, working
 through an example collaborative workflow. This lesson is best taught with
 attendees pairing up at the start. While not necessary, it is _very highly
-recommended_ that attendees who have not attended the previous [Intro Git
-lesson][intro-git] work through the material on prior to this lesson. 
+recommended_ that attendees who have not attended the previous [Intro
+Git][intro-git] lesson work through the material prior to this lesson. 
 
 **Preparation for this lesson**: To follow along with this lesson, you will
 need to have `bash` installed. For Linux and OSX users, `bash` is included as
@@ -56,16 +56,16 @@ of version control with command line Git. We wrapped up the lesson by uploading
 our version-controlled folder, or _Git repository_, onto GitHub, and looked at
 how to keep the GitHub version of a repo up to date with its local copy.
 
-In addition to all that, however, Git and GitHub also offer a host of
-incredibly powerful tools for collaborative work. Git's version-controlled
-framework offers a robust and reliable environment with which to work with
-others, where all changes to files are tracked and reviewed by other
-collaborators as they come in. While there is some initial overhead in getting
-used to the extra steps involved in Git collaboration versus working on
-real-time collaborative software such as Google Docs, the Git collaborative
-workflow ensures that all materials are backed up, well documented, and with
-all changes reviewed and approved by other collaborators. It has also made the
-development of these very workshops incredibly seamless!
+In addition to all that, however, Git and GitHub offer a host of incredibly
+powerful tools for collaborative work. Git's version-controlled framework
+offers a robust and reliable environment with which to work with others, where
+all changes to files are tracked and reviewed by other collaborators as they
+come in. While there is some initial overhead in getting used to the extra
+steps involved in Git collaboration versus working on real-time collaborative
+software such as Google Docs, the Git collaborative workflow ensures that all
+materials are backed up, well documented, and with all changes reviewed and
+approved by other collaborators. It has also made the development of these
+workshops incredibly seamless!
 
 Finally, it is worth noting that the vast majority of open source development
 takes place on GitHub, and understanding the GitHub collaboration workflow is
@@ -130,8 +130,8 @@ maintainer/admin of the decentralized repo.
 # Getting started with collaboration - the 'GitHub flow'
 
 Collaboration on GitHub generally centres around the 'GitHub flow'. This makes
-use of features we've seen before, such as forks and branches, but have yet to
-interact with.
+use of some new features, such as forks and branches, which we may have noticed
+before but have yet to interact with.
 
 Without using Git jargon, the GitHub flow is:
 
@@ -478,8 +478,8 @@ What we've covered today is essentially the vast majority of what you need to
 know to get started with collaborating on Git and even contributing to existing
 open source projects. There is of course more functionality (and even some
 occasional headaches in the form of merge conflicts...) but by and large these
-will be sufficient for both the cases we've mentioned above and have absolutely
-been sufficient for these workshops so far.
+will be sufficient for both the cases we've mentioned above, and have absolutely
+been sufficient for these workshops so far. Happy collaborating! 
 
 ## Additional resources:
 
