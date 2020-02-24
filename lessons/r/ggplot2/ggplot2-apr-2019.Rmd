@@ -7,17 +7,18 @@ output: pdf_document
   
 > ### Learning Objectives
 >
-> Create standard plots with `ggplot2` (scatter, line, hist)
-> Learn to modify plot appearance with `theme()`
-* Faceting plots
-> Composing multiple plots with `patchwork`
-> Annotating plots (model fits + text)
->
+> - Produce scatter plots, line plots, histograms, bar plots,
+> and boxplots using ggplot.
+> - Plot model fits with `geom_smooth`.
+> - Set universal plot settings.
+> - Understand and apply faceting in ggplot.
+> - Customize plots with `theme`.
 > 
 > ### Setup/Required packages
 >
-> - `install.packages('tidyverse')`
-> - `install.packages('patchwork')`
+> - `install.packages('dplyr')`
+> - `install.packages('ggplot2')`
+> - `install.packages('knitr')`
 >
 
 
@@ -47,10 +48,7 @@ customization of plots.
 
 ```{r}
 library(ggplot2)
-library(dplyr) # for some helper functions
-
-# alternatively, load in the full tidyverse
-# library(tidyverse)
+library(dplyr)
 ```
 
 
@@ -62,11 +60,11 @@ If you have an older computer and would like to just work with a subset of the
 data, you can create that subsetted data frame as follows:
   
 ```{r}
-d <- sample_frac(diamonds, size = 0.1) # should be 5400 rows instead
+d <- head(diamonds, n = 1000)
 ```
 
-This will create a new data frame `d` containing 10% of the rows in the original
-dataset following random sampling.
+This will create a new data frame `d` containing just the first 1000 rows
+of the dataset.
 
 ## Plotting with `ggplot2` - the geoms
 
@@ -82,7 +80,7 @@ ggplot(data = diamonds)
 ```
 
 If the arguments are provided in the right order then the
-names of the arguments can be omitted
+names of the arguments can be omitted (as with `dplyr`)
 
 ```{r}
 ggplot(diamonds)
@@ -99,6 +97,7 @@ ggplot(diamonds, aes(x = carat, y = price))
 in the plot (points, lines, bars). `ggplot2` offers many different geoms; we
 will use a few common ones today, including:
 * `geom_point()` for scatter plots, dot plots, etc.
+* `geom_line()` for trend lines, time-series, etc.
 * `geom_histogram()` for histograms
 
 To add a geom to the plot, use the `+` operator. Because we have two continuous
@@ -106,7 +105,7 @@ variables, let's use `geom_point()` first:
 
 ```{r}
 ggplot(diamonds, aes(x = carat, y = price)) +
-   geom_point()
+geom_point()
 ```
 
 The `+` in the `ggplot2` package is particularly useful because it allows you
@@ -154,6 +153,7 @@ ggplot(diamonds, aes(x = carat, y = price)) +
 Then, we start modifying this plot to extract more information from it. For
 instance, we can add transparency (`alpha`) to reduce overplotting:
   
+  
 ```{r}
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point(alpha = 0.5)
@@ -183,11 +183,50 @@ Turns out clarity appears to be a strong predictor here after all.  Given that
 IF1 is the best possible clarity measurement, we see that even 1-2 carat IF1
 diamonds fetch equivalent prices to 4-5 carat I1 (lowest clarity) diamonds.
 
+### Combining `dplyr` and `ggplot` - line plots
+
+What if we wanted to see how average carat varies by price?  We'd first have to
+calculate what the mean carat value is for each price before plotting.
+Fortunately for us, we can bring back some of those `dplyr` skills from our
+previous lesson to do just that.
+
+```{r}
+diamonds %>% 
+  group_by(price) %>% 
+  summarise(mean_carat = mean(carat))
+```
+
+This transformed dataset can be piped right into a `ggplot` call, with which we
+can proceed to plot. Note that the data frame does not need to be specified
+within the `ggplot` function since it's being passed a data frame by the
+preceding pipe chain.
+
+```{r}
+diamonds %>% 
+  group_by(price) %>% 
+  summarise(mean_carat = mean(carat)) %>% 
+  ggplot(aes(x = price, y = mean_carat)) +
+  geom_line()
+```
+
+There's definitely a lot going on here -- let's just focus on the price range 0 - 5000:
+
+```{r}
+diamonds %>% 
+  group_by(price) %>% 
+  summarise(mean_carat = mean(carat)) %>% 
+  filter(price < 5000) %>% 
+  ggplot(aes(x = price, y = mean_carat)) +
+  geom_line()
+```
+
+
 ### Histograms
 
-Similarly to how we made the above scatter plot, histograms in `ggplot2` can
-simply be tacked on as another geom. The difference is that histograms do not
-take in a y aesthetic, since that'll be 'count' by definition:
+Similarly to how we've made line plots and scatter plots so far, histograms in
+`ggplot2` can simply be tacked on as another geom. The difference is that
+histograms do not take in a y aesthetic, since that'll be 'count' by
+definition:
 
 ```{r}
 ggplot(diamonds, aes(x = carat)) +
@@ -202,10 +241,73 @@ ggplot(diamonds, aes(x = carat)) +
   geom_histogram(binwidth = 0.05)
 ```
 
+### Bar plots with `dplyr` and `ggplot` - using grouped `summarise` operations
+
+Earlier, we saw that the `clarity` variable seemed to be associated with the
+carat of a given diamond.  Let's investigate this further by calculating the
+mean carat for each value of `clarity`.  This can be done using a grouped
+`summarise` operation via `dplyr`:
+
+```{r}
+diamonds %>% 
+  group_by(clarity) %>% 
+  summarise(
+    mean_carat = mean(carat),
+    sd_carat = sd(carat),
+    n = n()) %>%
+  mutate(se_carat = sd_carat / sqrt(n))
+```
+
+Let's pipe this into a ggplot call with `geom_bar`. We have to be careful to
+specify `stat = 'identity'` as an argument to `geom_bar`. This is because
+`geom_bar` will otherwise try to apply some sort of transformation instead of
+trying to plot single values, like the ones we have above.
+
+```{r}
+diamonds %>% 
+  group_by(clarity) %>% 
+  summarise(
+    mean_carat = mean(carat),
+    sd_carat = sd(carat),
+    n = n()) %>% 
+  mutate(se_carat = sd_carat / sqrt(n)) %>%
+  ggplot(aes(x = clarity, y = mean_carat)) +
+  geom_bar(stat = 'identity')
+```
+
+We also calculated the standard deviation above using `sd()` within
+`summarise`. This can be used to generate an errorbar with `geom_errorbar()`:
+
+```{r}
+diamonds %>% 
+  group_by(clarity) %>% 
+  summarise(
+    mean_carat = mean(carat),
+    sd_carat = sd(carat),
+    n = n()) %>% 
+  mutate(se_carat = sd_carat / sqrt(n)) %>%
+  ggplot(aes(x = clarity, y = mean_carat)) +
+  geom_bar(stat = 'identity') +
+  geom_errorbar(aes(ymin = mean_carat - se_carat, 
+                    ymax = mean_carat + se_carat))
+```
+
+### Boxplots
+
+Although the above plot is in line with the pattern we observed in the scatter
+plot at the start of the lesson, we may want to go a step further and visualize
+the distribution of `carat` for each value of `clarity` with a boxplot.  These
+are rather straightforward to make:
+
+```{r}
+ggplot(diamonds, aes(x = clarity, y = carat)) +
+  geom_boxplot()
+```
+
 ## Model fits with `geom_smooth`
 
 Fitting models to data is a common means of investigating whether certain
-relationships are at play in a given dataset. `ggplot2` makes visualizing
+relationships are at play in a given dataset.  `ggplot2` makes visualizing
 these easy by largely consolidating line-fitting into a single geom -
 `geom_smooth`.
 
@@ -250,8 +352,8 @@ functions to style them.
 Let's start by regenerating the original scatter plot:
 
 ```{r}
-p <- ggplot(diamonds, aes(x = carat, y = price)) +
-  geom_point(aes(color = clarity), alpha = 0.5) # important to specify aes in geom_point for later in the lesson
+p <- ggplot(diamonds, aes(x = carat, y = price, color = clarity)) +
+  geom_point(alpha = 0.5)
 p
 ```
 
@@ -282,34 +384,9 @@ p +
   theme(axis.title = element_text(family = 'Helvetica', size = 14), 
         axis.text = element_text(family = 'Helvetica', size = 14, color = 'black'),
         axis.line = element_line(color = 'black', size = 0.75),
-        panel.background = element_blank())
-```
-
-Some axis elements also have specific `x` and `y` versions; for instance,
-although we've modified `axis.text` with a single argument above, we can
-also specify certain settings that specifically apply to `axis.text.x`. Let's
-have the labels on a 45 degree angle:
-
-```{r}
-p +
-  theme(axis.title = element_text(family = 'Helvetica', size = 14), 
-        axis.text = element_text(family = 'Helvetica', size = 14, color = 'black'),
-        axis.line = element_line(color = 'black', size = 0.75),
         panel.background = element_blank(),
-        axis.text.x = element_text(angle = 45))
+        legend.key = element_blank())
 ```
-
-The final element type is `element_rect`. We can use this with
-`panel.background` provide the plot with a light grey background:
-
-```{r}
-p +
-  theme(axis.title = element_text(family = 'Helvetica', size = 14), 
-        axis.text = element_text(family = 'Helvetica', size = 14, color = 'black'),
-        axis.line = element_line(color = 'black', size = 0.75),
-        panel.background = element_rect(color = 'light grey'))
-```
-
 
 `ggplot2` also comes preloaded with a host of pre-made themes - try them out:
 
@@ -317,192 +394,6 @@ p +
 p + theme_bw()
 p + theme_classic()
 ```
-
-However, it's much more likely you'll want to create a theme specific
-to your own needs. Fortunately, saving custom themes is quite straightforward.
-Let's save the above theme to an object:
-
-```{r}
-fig_theme <- theme(axis.title = element_text(family = 'Helvetica', size = 14), 
-        axis.text = element_text(family = 'Helvetica', size = 14, color = 'black'),
-        axis.line = element_line(color = 'black', size = 0.75),
-        panel.background = element_blank())
-```
-
-This can now be added to plots like any other `ggplot` object:
-
-```{r}
-p +
-  fig_theme
-```
-
-We'll be revisiting another use of this concept later in the lesson.
-
-#### Legend formatting
-
-Legend formatting involves a few extra considerations. First of all,
-if you want to remove a legend altogether, this is done with `guides()`:
-
-```{r}
-p +
-  fig_theme +
-  guides(color = FALSE)
-```
-
-Notice that the argument given the `guides` is the aesthetic (in this
-case, color) that we were using to generate the legend. 
-
-Let's move our legend around and style the text a little:
-
-```{r}
-p +
-  fig_theme +
-  theme(legend.position = 'bottom', # special arg - values: 'top', 'left', etc
-        legend.title = element_text(size = 12),
-        legend.text = element_text(size = 12))
-```
-
-`legend.key` and `legend.background` also take in `element_rect`. Note
-the difference between `color` (border color) and `fill` (fill color):
-
-```{r}
-p +
-  fig_theme +
-  theme(legend.position = 'bottom',
-        legend.title = element_text(size = 12),
-        legend.text = element_text(size = 12),
-        legend.key = element_rect(color = 'black', fill = 'white'),
-        legend.background = element_rect(color = 'black'))
-```
-
-These legend settings can also be saved as an object for reuse. We'll set `legend.position` back to `right`.
-
-```{r}
-legend_theme <- theme(legend.position = 'right',
-        legend.title = element_text(size = 12),
-        legend.text = element_text(size = 12),
-        legend.key = element_rect(color = 'black', fill = 'white'),
-        legend.background = element_rect(color = 'black'))
-```
-
-
-
-## Plot annotation
-
-### The `labs()` function
-
-The `labs` function is a useful catch-all to rename your axes and more.
-Let's add custom x and y axis titles:
-
-```{r}
-p + 
-  fig_theme +
-  legend_theme +
-  labs(x = 'Carat',
-       y = 'Price ($)')
-```
-
-Some axis titles require mathematical formatting. Let's pretend,
-for the sake of this example, that carats were abbreviated to
-'c^2', and that this is what we wanted the axis title to be.
-Mathematical expressions can be created using the `expression` helper
-function. Note that inputs to `expression` are *not* in quotes:
-
-```{r}
-p +
-  fig_theme +
-  legend_theme +
-  labs(x = expression(c^{2}),
-       y = 'Price ($)')
-```
-
-`expression` works off of syntax known as **plotmath** - plotmath syntax is why
-we need the `{}` around our superscript. We won't go into further details here,
-but a full syntax reference can be found by running `?plotmath`.
-
-To combine plotmath with text, use `paste()` within `expression`. Be
-mindful of including spaces where needed; `expression` is quite literal.
-
-```{r}
-p +
-  fig_theme +
-  legend_theme +
-  labs(x = expression(paste('Values (', c^{2}, ')')),
-       y = 'Price ($)')
-```
-
-### Adding text directly to a plot
-
-Let's say we fit a linear model with carat as the predictor and price as the
-response. How can we add the R squared and p-value of our model to the plot
-within R?
-
-`ggplot` offers a useful `annotate` function for this reason. First, let's
-quickly fit this model and get our R squared and model p-value:
-
-```{r}
-lm(price ~ carat, data = diamonds) %>% 
-  summary()
-```
-
-`annotate` uses positioning values based off of the axis scales of the plot.
-Let's add the R squared to the bottom right:
-
-```{r}
-p +
-  fig_theme +
-  legend_theme +
-  geom_smooth(method = 'lm', color = 'black') +
-  annotate('text', x = 3.5, y = 3000,
-           label = 'R^2 = 0.8493')
-```
-
-We can style the added text with plotmath by setting `parse = TRUE`. Note that
-we change the label slightly to match plotmath syntax.
-
-```{r}
-p +
-  fig_theme +
-  legend_theme +
-  geom_smooth(method = 'lm', color = 'black') +
-  annotate('text', x = 3.5, y = 3000,
-           label = 'italic(R)^{2} == 0.8493', parse = TRUE)
-```
-
-Let's add the p-value:
-
-```{r}
-p +
-  fig_theme +
-  legend_theme +
-  geom_smooth(method = 'lm', color = 'black') +
-  annotate('text', x = 3.5, y = 3000,
-           label = 'italic(R)^{2} == 0.8493', parse = TRUE) +
-  annotate('text', x = 3.53, y = 500,
-           label = 'p < 2.2 %*% 10^{-16}', parse = TRUE)
-```
-
-### An aside - changing the dimensions of a plot
-
-Notice how in the linear fit above, the line extends much further out. If we
-wanted to change the 'zoom' of the plot to focus on the main cluster of points,
-we can use `coord_cartesian`:
-
-```{r}
-p +
-  fig_theme +
-  legend_theme +
-  geom_smooth(method = 'lm', color = 'black') +
-  annotate('text', x = 3.5, y = 3000,
-           label = 'italic(R)^{2} == 0.8493', parse = TRUE) +
-  annotate('text', x = 3.53, y = 500,
-           label = 'p < 2.2 %*% 10^{-16}', parse = TRUE) +
-  coord_cartesian(x = c(0, 4), y = c(0, 20000))
-```
-
-This does not affect the points or the linear fit in any way; it just rescales the plot itself. 
-
-## Making multiple plots
 
 ### Faceting
 
@@ -515,7 +406,7 @@ by carat) but split it by clarity:
 ggplot(diamonds, aes(x = carat, y = price, color = clarity)) +
   geom_point(alpha = 0.5) +
   facet_wrap(~ clarity) +
-  fig_theme
+  theme_classic()
 ```
 
 Alternatively, it may be useful to facet by two categorical variables. This is
@@ -525,94 +416,24 @@ where `facet_grid` comes in:
 ggplot(diamonds, aes(x = carat, y = price, color = clarity)) +
   geom_point(alpha = 0.5) +
   facet_grid(cut ~ clarity) +
-  fig_theme
+  theme_classic()
 ```
-
-Notice how our facet labels don't match the rest of our theme. This is because
-we did not specify anything for labels in creating `fig_theme` above. Facet
-labels can be styled within `theme` using `strip.background` (`element_rect`)
-and `strip.text` (`element_text`). Try it out! 
-
-### Composing multiple plots with `patchwork`
-
-While faceting is useful to make subplots with, it's specifically limited to
-doing so off of categorical variables. What if we wanted to show both our
-scatter plot above *and* a histogram of carat in the same figure?
-
-This is where `patchwork` comes in. `patchwork` allows for entire plots
-to be strung together with `+`, as if they were themselves geoms. Let's
-prep our plots:
-
-```{r}
-fig_1a <- p +
-  fig_theme +
-  legend_theme +
-  labs(x = 'Carat', y = 'Price', tag = 'A')
-
-fig_1b <- ggplot(diamonds, aes(x = carat)) +
-  geom_histogram(binwidth = 0.05) +
-  fig_theme +
-  labs(x = 'Carat', y = 'Count', tag = 'B')
-```
-
-Note that by saving our theme to `fig_theme`, we can ensure these
-two plots have a consistent look. We've also added `tag` to `labs`
-since these are now going to be subplots in a single figure.
-Note that `tag` requires `ggplot2` 3.0 -- if you see an error,
-you may need to update the package.
-
-Let's put these together:
-
-```{r}
-library(patchwork)
-
-fig_1a + fig_1b
-```
-
-It's really that simple! If we want these plot tags to be styled differently, we
-would have to update `plot.tag` (`element_text`) within `theme`. But here we
-see the advantage of consistent styling -- these plots look nice and
-'standardized'!
-
-We can modify plot layout using `plot_layout`, which is tacked on
-with the `+`. 
-
-```{r}
-fig_1a + fig_1b + plot_layout(nrow = 2, ncol = 1)
-```
-
-Finally, the combined plot can be saved to an object:
-
-```{r}
-fig_1 <- fig_1a + fig_1b
-```
-
-
-# Saving plots
-
-Plots are saved using the `ggsave` function. Let's save our
-combined `fig_1` plot:
-
-```{r}
-ggsave('fig_1.png', plot = fig_1)
-```
-
 
 # Wrapping up
 
 We've covered many of the core elements of `ggplot2` today:
 
 * Basic structure of a ggplot call
-* A few introductory `geoms`
+* The `geom` family
     * `geom_point`
+    * `geom_line`
     * `geom_histogram`
+    * `geom_bar`
+    * `geom_boxplot`
 * Model fits with `geom_smooth`
 * Customizing plots with `theme`
     * Using `element` helper functions - `element_text` and `element_line`
-* Annotating plots
 * Faceting with `facet_wrap` and `facet_grid`
-* Composing multiple plots with `patchwork`
-* Saving plots with `ggsave`
 
 ## Further resources
 
@@ -627,6 +448,5 @@ We've covered many of the core elements of `ggplot2` today:
 [dc-r]: https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html
 [eeb313]: https://uoftcoders.github.io/rcourse/lec04-dplyr.html
 [ggplot-book]: https://www.amazon.com/dp/0387981403/ref=cm_sw_su_dp?tag=ggplot2-20
-
 
 
