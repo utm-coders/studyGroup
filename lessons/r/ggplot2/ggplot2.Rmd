@@ -1,19 +1,21 @@
 ---
-title: Data visualization in R with ggplot2
-output: pdf_document
+title: "Data visualization in R with ggplot2"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
 ---
   
 ## Lesson preamble
   
 > ### Learning Objectives
 >
-> Create standard plots with `ggplot2` (scatter, line, hist)
-> Learn to modify plot appearance with `theme()`
-* Faceting plots
-> Composing multiple plots with `patchwork`
-> Annotating plots (model fits + text)
+> - Create standard plots with `ggplot2` (scatter, line, hist)
+> - Learn to modify plot appearance with `theme()`
+> - Faceting plots
+> - Composing multiple plots with `patchwork`
+> - Annotating plots (model fits + text)
 >
-> 
 > ### Setup/Required packages
 >
 > - `install.packages('tidyverse')`
@@ -134,7 +136,7 @@ and y axis you set up in `aes()`.
 other layer, `ggplot2` will not add the new layer and R will return an error
 message.
 
-```{r}
+```{r, eval=FALSE}
 # this will raise an error
 ggplot(diamonds, aes(x = carat, y = price)) 
 + geom_point()
@@ -338,7 +340,7 @@ p +
 
 We'll be revisiting another use of this concept later in the lesson.
 
-#### Legend formatting
+### Legend formatting
 
 Legend formatting involves a few extra considerations. First of all,
 if you want to remove a legend altogether, this is done with `guides()`:
