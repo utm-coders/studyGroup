@@ -7,7 +7,7 @@ tags:
   - beginner
 ---
 
- - **Authors**: James Santangelo and Ahmed Hasan, based heavily on [material from John Ladan](https://github.com/UofTCoders/studyGroup/blob/gh-pages/lessons/misc/bash-intro/lesson.md) and a fourth year Genomics course bash primer written and delivered by Rob Ness and Ahmed Hasan. Updated Novemebr 2020 by Rose Mastin Wood for the Aquatic Ecology Journal club
+ - **Authors**: James Santangelo and Ahmed Hasan, based heavily on [material from John Ladan](https://github.com/UofTCoders/studyGroup/blob/gh-pages/lessons/misc/bash-intro/lesson.md) and a fourth year Genomics course bash primer written and delivered by Rob Ness and Ahmed Hasan. Updated November 2020 by Rose Mastin Wood for the Aquatic Ecology Journal club
  - **Research field**: Biology
  - **Lesson topic**: Introduction to shells and the command-line with bash.
  - **Lesson content URL**: <https://github.com/utm-coders/studyGroup/tree/gh-pages/lessons/bash/intro-bash>
